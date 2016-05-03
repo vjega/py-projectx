@@ -2,7 +2,7 @@
 
 ### Msys Technologies
 
-**Installation Steps (Ubuntu 12.02 +)** 
+### Installation Steps (Ubuntu 12.02 +)
 
    
 ###Install Python 2.7 +
