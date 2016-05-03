@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import os
+PROJECT_DIR=os.path.dirname(__file__)
 from django.conf.urls import url, include
 from django.contrib import admin
 
@@ -21,3 +23,6 @@ urlpatterns = [
     url(r'^api/', include('projectx.urls')),
     url(r'^portal/', include('portal.urls')),
 ]
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
