@@ -1,8 +1,154 @@
 {%extends 'base.html'%}
 {%block content%}
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <h1>Dhamu</h1>
-</div><!-- /.box -->
+ <section class="content">
+<div class="main_container" ng-controller="dashboardCtl">
+<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"> 
+                <div>&nbsp;</div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading clearfix">  
+                        <div class="row"> 
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
+                                <div class="row">
+                                    <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
+                                        <b>{{vm.json_details.title}}</b>
+                                    </span>
+                                    <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right">
+                                    </span>                            
+                                </div>
+                            </div> 
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right"> 
+                             <div class="row">       
+                              <span class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pull-right">
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.firstRecord()">
+                                    <i class="fa fa-print icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.searchRecord()">
+                                    <i class="fa fa-search icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()">
+                                    <i class="fa fa-trash-o icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="toggle= !toggle" tooltip="Next">
+                                    <i ng-show="toggle" class="fa fa-table icon-color"></i>
+                                    <i ng-hide="toggle" class="fa fa-list-ul icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.editRecord()">
+                                    <i class="fa fa-pencil icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.firstRecord()">
+                                    <i class="fa fa-fast-backward icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()" >
+                                    <i class="fa fa-backward icon-color" ng-cl></i> 
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.next()" >
+                                    <i class="fa fa-forward icon-color"></i>
+                                </a>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.lastRecord()">
+                                    <i class="fa fa-fast-forward icon-color"></i>
+                                </a>  
+                              </span>                                
+                             </div>
+                            </div>  
+                        </div>             
+                    </div>
+
+                   <!--  <uib-tabset  active="active">
+                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in json_details.tabset[0]" heading="{{ json_details }}"> -->
+                            <div class="panel-body">
+                                <div class="form-group row">
+                                    <div ng-repeat="elem in json_details[0]" > 
+                                        <label  class="form-controll [[elem.labelclass]]">[[elem.name]]</label>
+                                        <div ng-if=" elem.type == 'string' ">
+                                            <input type="text" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]" > 
+                                        </div>
+                                        <div ng-if="elem.type == 'radio' ">
+                                            <div class="{{elem.class}}" ng-repeat = "item in elem.options track by $index">
+                                                <input type="radio" id="{{item.id}}" name="{{item.id}}" value="{{item.name}}" ng-model="vm.empData[elem.id]"  ng-disabled="!vm.isEnabled"/>{{item.name}}
+                                            </div>
+                                        </div>
+                                        <div ng-if="elem.type == 'checkbox' ">
+                                            <input type="checkbox" id="{{elem.id}}" class="{{elem.class}}" ng-model="vm.empData[elem.id]" ng-disabled="!vm.isEnabled">
+                                        </div>
+                                        <div ng-if="elem.type == 'date' ">
+                                            <p class="input-group {{elem.class}}">
+                                              <input type="text" class="form-control" uib-datepicker-popup="{{vm.format}}" ng-model="dt" is-open="vm.popup1.opened" datepicker-options="vm.dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                                              <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="vm.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                              </span>
+                                            </p>
+                                        </div>
+                                        <div ng-if="elem.type == 'select' ">
+                                            <select class="{{elem.class}}" ng-model="vm.empData[elem.id]"
+                                            ng-disabled="!vm.isEnabled"
+                                            >
+                                                <option ng-repeat="item in elem.options track by $index" value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                            <div class="row">
+                                    </div>
+                                </div>
+                            </div>
+                      <!--   </uib-tab>
+                    </uib-tabset> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+
+</div>
+</section>
+</div>
+
+<style type="text/css">
+    .icon-color{
+        color:#FFF;
+    }
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+    
+</style>
+
+
+<!-- Content Wrapper. Contains page content -->
+<!-- <div class="content-wrapper">
+ <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Hover Data Table</h3>
+                </div>
+                <div class="box-body">
+                  <table id="emp-table" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Sex</th>
+                        <th>DOB</th>
+                        <th>Location</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div> -->
 {%endblock%}
 
