@@ -5,11 +5,9 @@ portalApp.controller('sidemenuCtl',['$scope','$http','sidemenuFactory','$rootSco
 	$scope.test = [];
     $http.get('/api/menus')
     	.success(function (data, status) {
-            console.log("ddddddd", data)
            $scope.test = data;
         })
         .error(function (data, status) {
-            console.log(data);
             console.log(status);
         });
 
@@ -18,7 +16,6 @@ portalApp.controller('sidemenuCtl',['$scope','$http','sidemenuFactory','$rootSco
     $scope.so_view = function(view){
         return sidemenuFactory.getJson(view)
                 .then(function(data){
-                    console.log("data", data.data)
                     $rootScope.json_details = data.data;
                 })
 
@@ -32,19 +29,15 @@ portalApp.controller('sidemenuCtl',['$scope','$http','sidemenuFactory','$rootSco
 }]);
 
 portalApp.factory('sidemenuFactory',['$http',function ($http) {
-
-
         var service = {
             getJson : getJson
         }
 
         return service;
 
-      function getJson(view){
-        console.log("ttttttttttttt", view)
+        function getJson(view){
         return $http.get('/static/portal/json/'+view+'.json')
             .success(function (data, status) {
-            console.log("ddddddd", data)
             return data;
         })
         .error(function (data, status) {

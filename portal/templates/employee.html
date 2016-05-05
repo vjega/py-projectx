@@ -67,26 +67,26 @@
                                             <input type="text" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]" > 
                                         </div>
                                         <div ng-if="elem.type == 'radio' ">
-                                            <div class="{{elem.class}}" ng-repeat = "item in elem.options track by $index">
-                                                <input type="radio" id="{{item.id}}" name="{{item.id}}" value="{{item.name}}" ng-model="vm.empData[elem.id]"  ng-disabled="!vm.isEnabled"/>{{item.name}}
+                                            <div class="[[elem.class]]" ng-repeat = "item in elem.options track by $index">
+                                                <input type="radio" id="[[item.id]]" name="[[item.id]]" value="[[item.name]]" ng-model="vm.empData[elem.id]" />[[item.name]]
                                             </div>
                                         </div>
                                         <div ng-if="elem.type == 'checkbox' ">
-                                            <input type="checkbox" id="{{elem.id}}" class="{{elem.class}}" ng-model="vm.empData[elem.id]" ng-disabled="!vm.isEnabled">
+                                            <input type="checkbox" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]">
                                         </div>
                                         <div ng-if="elem.type == 'date' ">
-                                            <p class="input-group {{elem.class}}">
-                                              <input type="text" class="form-control" uib-datepicker-popup="{{vm.format}}" ng-model="dt" is-open="vm.popup1.opened" datepicker-options="vm.dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                                            <p class="input-group [[elem.class]]">
+                                              <input type="text" class="form-control" uib-datepicker-popup="[[format]]" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
                                               <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="vm.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                                               </span>
                                             </p>
                                         </div>
                                         <div ng-if="elem.type == 'select' ">
-                                            <select class="{{elem.class}}" ng-model="vm.empData[elem.id]"
-                                            ng-disabled="!vm.isEnabled"
+                                            <select class="[[elem.class]]" ng-model="vm.empData[elem.id]"
+                                            
                                             >
-                                                <option ng-repeat="item in elem.options track by $index" value="{{item.id}}">{{item.name}}</option>
+                                                <option ng-repeat="item in elem.options track by $index" value="[[item.id]]">[[item.name]]</option>
                                             </select>
                                         </div>
                                             <div class="row">
