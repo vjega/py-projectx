@@ -222,7 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar" ng-controller="sidemenuCtl">
+      <aside class="main-sidebar" ng-controller="sidemenuCtl as vm">
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -253,8 +253,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="header">HEADER</li>
-            <li class="treeview" ng-repeat="rm in test" >
-              <a href="#" ng-click="so_view(rm.name)" ng-bind-html="rm.caption">[[rm.caption]]
+            <li class="treeview" ng-repeat="rm in vm.test" >
+              <a href="#" ng-click="vm.so_view(rm.name)" ng-bind-html="rm.caption">[[rm.caption]]
               </a>
               <!-- <ul class="treeview-menu">
                 <li ng-repeat="sm in rm.submenu">
@@ -365,6 +365,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{% static 'portal/bower_components/angular/angular.js' %}"></script>
     <script src="{% static 'portal/bower_components/angular-resource/angular-resource.js' %}"></script>
     <script src="{% static 'portal/bower_components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
+    <script src="{% static 'portal/bower_components/angular-route/angular-route.js' %}"></script>
     
     <script src="{% static 'portal/js/app.js' %}"></script>
     <script src="{% static 'portal/js/controllers/menu.ctl.js' %}"></script>

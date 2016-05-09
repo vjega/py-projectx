@@ -102,7 +102,7 @@ portalApp.controller('dashboardCtl',['$scope', '$rootScope', function ($scope, $
    /* $scope.data = sidemenuFactory.so_view();
     console.log("RRRRRRRRRRRr", $scope.data)*/
      }());
-  $scope.$watch('json_details', function(value) {
+  $scope.$watch('$rootScope.json_details', function(value) {
       console.log("Raaaaaaaaaaaaaaaaaaaaaa", $rootScope.json_details )
     });
 

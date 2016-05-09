@@ -1,5 +1,5 @@
 
-var portalApp = angular.module('portalApp', ['ngResource', 'ui.bootstrap']);
+var portalApp = angular.module('portalApp', ['ngResource', 'ui.bootstrap', 'ngRoute']);
 
 portalApp.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[').endSymbol(']]');

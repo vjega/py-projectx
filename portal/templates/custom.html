@@ -2,7 +2,7 @@
 {%block content%}
 <div class="content-wrapper">
  <section class="content">
-<div class="main_container" ng-controller="dashboardCtl">
+<div class="main_container" ng-controller="sidemenuCtl as vm">
 <section id="dashboard-view" class="mainbar">
     <section class="matter">
         <div class="row">
@@ -14,7 +14,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
                                 <div class="row">
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
-                                        <b>{{vm.json_details.title}}</b>
+                                        <b>[[vm.json_details]]</b>
                                     </span>
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right">
                                     </span>                            
@@ -58,11 +58,12 @@
                     </div>
 
                    <!--  <uib-tabset  active="active">
-                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in json_details.tabset[0]" heading="{{ json_details }}"> -->
+                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details" heading="{{ tabOneByOne.tabCaption }}"> -->
                             <div class="panel-body">
                                 <div class="form-group row">
-                                    <div ng-repeat="elem in json_details[0]" > 
-                                        <label  class="form-controll [[elem.labelclass]]">[[elem.name]]</label>
+                                    <div>[[vm.json_details]]</div>
+                                    <div ng-repeat="elem in vm.json_details" > 
+                                        <label  class="form-controll [[elem.labelclass]]">[[elem]][[elem.tabCaption]]</label>
                                         <div ng-if=" elem.type == 'string' ">
                                             <input type="text" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]" > 
                                         </div>
