@@ -20,7 +20,7 @@ fields.append({
 fields.append({
     'fieldName':'Name',
     'fieldCaption':'Name',
-    'fieldType':'text',
+    'fieldType':'string',
     'fieldDefault':1,
     'fieldConstrain':'pk'
 })
@@ -28,7 +28,7 @@ fields.append({
 fields.append({
     'fieldName':'age',
     'fieldCaption':'Age',
-    'fieldType':'integer',
+    'fieldType':'string',
     'fieldDefault':1,
     'fieldConstrain':'pk'
 })
@@ -36,7 +36,7 @@ fields.append({
 fields.append({
     'fieldName':'sex',
     'fieldCaption':'Sex',
-    'fieldType':'integer',
+    'fieldType':'radio',
     'fieldDefault':1,
     'fieldConstrain':'pk'
 })
@@ -44,7 +44,7 @@ fields.append({
 fields.append({
     'fieldName':'city',
     'fieldCaption':'City',
-    'fieldType':'integer',
+    'fieldType':'string',
     'fieldDefault':1,
     'fieldConstrain':'pk'
 })

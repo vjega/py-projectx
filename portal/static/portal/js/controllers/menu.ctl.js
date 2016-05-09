@@ -13,17 +13,19 @@ portalApp.controller('sidemenuCtl',['$scope', '$location', '$http','sidemenuFact
         });
 
    
-
+/*
     vm.so_view = function(view){
-        $http.get(view)
-        .success(function (data, status) {
-            vm.json_details = 'test';
-        })
-        .error(function (data, status) {
-            console.log(status);
-        });
-    }
+        return sidemenuFactory.getJson(view)
+            .then(function(data){
+                console.log("yyyyyyyyyyy", data.data)
+                var temp = [];
+                temp.push(data.data);
+                vm.json_details = temp[0];
+                console.log("test", vm.json_details)
+            });
 
+    }
+*/
   
 
    /* var resource = $resource('/api/menus');
@@ -38,10 +40,9 @@ portalApp.factory('sidemenuFactory',['$http',function ($http) {
 
         return service;
 
-        function getJson(view){
-            console.log("view", view)
+        function getJson(){
         /*return $http.get('/static/portal/json/'+view+'.json')*/
-         return $http.get(view)
+         return $http.get('/portal/enquiry')
             .success(function (data, status) {
                 console.log("rrrrrrrrrrrrrrreeeeewwwwwwwww", data)
             return data;

@@ -2,7 +2,7 @@
 {%block content%}
 <div class="content-wrapper">
  <section class="content">
-<div class="main_container" ng-controller="sidemenuCtl as vm">
+<div class="main_container" ng-controller="dashboardCtl as vm">
 <section id="dashboard-view" class="mainbar">
     <section class="matter">
         <div class="row">
@@ -14,7 +14,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
                                 <div class="row">
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
-                                        <b>[[vm.json_details]]</b>
+                                        <b></b>
                                     </span>
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right">
                                     </span>                            
@@ -57,25 +57,25 @@
                         </div>             
                     </div>
 
-                   <!--  <uib-tabset  active="active">
-                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details" heading="{{ tabOneByOne.tabCaption }}"> -->
+                    <uib-tabset  active="active">
+                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
                                 <div class="form-group row">
-                                    <div>[[vm.json_details]]</div>
-                                    <div ng-repeat="elem in vm.json_details" > 
-                                        <label  class="form-controll [[elem.labelclass]]">[[elem]][[elem.tabCaption]]</label>
-                                        <div ng-if=" elem.type == 'string' ">
+                                    <!-- <div>[[vm.json_details]]</div> -->
+                                    <div ng-repeat="elem in tabOneByOne.field" > 
+                                        <label  class="form-controll [[elem.labelclass]]">[[elem.fieldCaption]]</label>
+                                        <div ng-if=" elem.fieldType == 'string' ">
                                             <input type="text" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]" > 
                                         </div>
-                                        <div ng-if="elem.type == 'radio' ">
+                                        <div ng-if="elem.fieldType == 'radio' ">
                                             <div class="[[elem.class]]" ng-repeat = "item in elem.options track by $index">
                                                 <input type="radio" id="[[item.id]]" name="[[item.id]]" value="[[item.name]]" ng-model="vm.empData[elem.id]" />[[item.name]]
                                             </div>
                                         </div>
-                                        <div ng-if="elem.type == 'checkbox' ">
+                                        <div ng-if="elem.fieldType == 'checkbox' ">
                                             <input type="checkbox" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]">
                                         </div>
-                                        <div ng-if="elem.type == 'date' ">
+                                        <div ng-if="elem.fieldType == 'date' ">
                                             <p class="input-group [[elem.class]]">
                                               <input type="text" class="form-control" uib-datepicker-popup="[[format]]" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
                                               <span class="input-group-btn">
@@ -83,7 +83,7 @@
                                               </span>
                                             </p>
                                         </div>
-                                        <div ng-if="elem.type == 'select' ">
+                                        <div ng-if="elem.fieldType == 'select' ">
                                             <select class="[[elem.class]]" ng-model="vm.empData[elem.id]"
                                             
                                             >
@@ -94,8 +94,8 @@
                                     </div>
                                 </div>
                             </div>
-                      <!--   </uib-tab>
-                    </uib-tabset> -->
+                        </uib-tab>
+                    </uib-tabset>
                 </div>
             </div>
         </div>
