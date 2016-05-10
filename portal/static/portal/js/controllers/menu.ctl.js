@@ -1,19 +1,30 @@
-portalApp.controller('sidemenuCtl',['$scope', '$location', '$http','sidemenuFactory','$rootScope', function ($scope, $location ,$http, sidemenuFactory, $rootScope) {
+portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', function ($scope, $q ,$http, renderTemplate) {
     var vm = this;
 
-    vm.json_details = [];
-	$scope.menu_tree = {};
+    vm.menu = [];
+    $scope.menu_tree = {};
     $scope.modules=[];
     $scope.menu = [];
 
-    $http.get('/api/menus')
-    	.success(function (data, status) {
-            vm.menu = data;
+    activate();
+    function activate() {
+        var promises = [get_menu()];
+          return $q.all(promises).then(function(){
+              /*logger.info('Activated ZoneController-info View');*/
+        });
+    }
+
+    function get_menu(){
+        console.log("dddddddddddddddddddddddddd")
+        $http.get('/api/menus')
+        .success(function (data, status) {
+            vm.menu.push(data)
             genrate_modules(data)
         })
         .error(function (data, status) {
             console.log(status);
         });
+    }
 
     var genrate_modules = function (data){
         for(count in data){
@@ -33,20 +44,15 @@ portalApp.controller('sidemenuCtl',['$scope', '$location', '$http','sidemenuFact
         console.log($scope.menu_tree);
         console.log("******************");
     }
-   
-/*
-    vm.so_view = function(view){
-        return sidemenuFactory.getJson(view)
-            .then(function(data){
-                console.log("yyyyyyyyyyy", data.data)
-                var temp = [];
-                temp.push(data.data);
-                vm.json_details = temp[0];
-                console.log("test", vm.json_details)
-            });
 
+
+   
+
+    vm.so_view = function(view){
+        console.log("dhamu")
+        renderTemplate.getJson(view);
     }
-*/
+
   
 
    /* var resource = $resource('/api/menus');
@@ -54,15 +60,37 @@ portalApp.controller('sidemenuCtl',['$scope', '$location', '$http','sidemenuFact
     console.log("rest", $scope.example1)*/
 }]);
 
-portalApp.factory('sidemenuFactory',['$http',function ($http) {
-        var service = {
+portalApp.factory('renderTemplate',['$http',function ($http) {
+
+    var service = {
+        getJson : getJson
+    }
+
+    service.list = [];
+
+
+    function getJson(view){
+        $http.get('/portal/'+view)
+            .success(function(data, status){
+                console.log("dattt", data)
+                service.list.push(data)
+            })
+            .error(function (data, status) {
+            console.log(data);
+        });
+    }
+
+
+
+
+    return service;
+        /*var service = {
             getJson : getJson
         }
 
         return service;
 
         function getJson(){
-        /*return $http.get('/static/portal/json/'+view+'.json')*/
          return $http.get('/portal/enquiry')
             .success(function (data, status) {
                 console.log("rrrrrrrrrrrrrrreeeeewwwwwwwww", data)
@@ -72,7 +100,7 @@ portalApp.factory('sidemenuFactory',['$http',function ($http) {
             console.log(data);
         });
 
-    }
+    }*/
 
 }]);
 

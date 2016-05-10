@@ -58,7 +58,7 @@
                     </div>
 
                     <uib-tabset  active="active">
-                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details" heading="[[ tabOneByOne.tabCaption ]]">
+                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0]" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
                                 <div class="form-group row">
                                     <!-- <div>[[vm.json_details]]</div> -->

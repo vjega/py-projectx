@@ -1,20 +1,23 @@
 fields = []
 tabs = []
+table =[]
 
 fields.append({
     'fieldName':'slno',
     'fieldCaption':'Sl.No',
-    'fieldType':'integer',
+    'fieldType':'string',
     'fieldDefault':1000,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 });
 
 fields.append({
     'fieldName':'No',
     'fieldCaption':'Number',
-    'fieldType':'integer',
+    'fieldType':'string',
     'fieldDefault':1,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 })
 
 fields.append({
@@ -22,7 +25,8 @@ fields.append({
     'fieldCaption':'Name',
     'fieldType':'string',
     'fieldDefault':1,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 })
 
 fields.append({
@@ -30,7 +34,8 @@ fields.append({
     'fieldCaption':'Age',
     'fieldType':'string',
     'fieldDefault':1,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 })
 
 fields.append({
@@ -38,7 +43,8 @@ fields.append({
     'fieldCaption':'Sex',
     'fieldType':'radio',
     'fieldDefault':1,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 })
 
 fields.append({
@@ -46,7 +52,8 @@ fields.append({
     'fieldCaption':'City',
     'fieldType':'string',
     'fieldDefault':1,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 })
 
 tabs.append({
@@ -60,7 +67,7 @@ fields = []
 fields.append({
     'fieldName':'dob',
     'fieldCaption':'Date of Birth',
-    'fieldType':'integer',
+    'fieldType':'date',
     'fieldDefault':1,
     'fieldConstrain':'pk'
 })
@@ -68,7 +75,7 @@ fields.append({
 fields.append({
     'fieldName':'doj',
     'fieldCaption':'Date of joining',
-    'fieldType':'integer',
+    'fieldType':'date',
     'fieldDefault':None,
     'fieldConstrain':'pk'
 })
@@ -77,6 +84,16 @@ tabs.append({
     'tabName':'personal',
     'tabCaption':'Personal',
     'field':fields
+})
+
+table.append({
+    'id':27,
+    'name':'enquiry',
+    'caption':'Enquiry',
+    'table':'employee',
+    'tabs':tabs,
+    'actions':'',
+    'pk':'slno'
 })
 
 
