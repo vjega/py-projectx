@@ -1,17 +1,38 @@
 portalApp.controller('sidemenuCtl',['$scope', '$location', '$http','sidemenuFactory','$rootScope', function ($scope, $location ,$http, sidemenuFactory, $rootScope) {
-    console.log("hai deepak");
     var vm = this;
+
     vm.json_details = [];
- 
-	vm.test = [];
+	$scope.menu_tree = {};
+    $scope.modules=[];
+    $scope.menu = [];
+
     $http.get('/api/menus')
     	.success(function (data, status) {
-            vm.test = data;
+            vm.menu = data;
+            genrate_modules(data)
         })
         .error(function (data, status) {
             console.log(status);
         });
 
+    var genrate_modules = function (data){
+        for(count in data){
+            if ($scope.modules.indexOf(data[count].module) == -1) {
+                $scope.modules.push(data[count].module);
+                //if($scope.modules[count] == $scope.menu_tree[data[count].module]){
+                    $scope.menu_tree[data[count].module] = data;
+                //}
+            }
+        }
+
+        console.log("******************");
+        console.log($scope.modules);
+        console.log("******************");
+
+        console.log("******************");
+        console.log($scope.menu_tree);
+        console.log("******************");
+    }
    
 /*
     vm.so_view = function(view){
