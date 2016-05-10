@@ -55,12 +55,12 @@ def employee_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def employee_detail(request, pk):
+def employee_detail(request, emp_id):
     """
     Retrieve, update or delete a code snippet.
     """
     try:
-        employee = Employee.objects.get(pk=pk)
+        employee = Employee.objects.get(emp_id=emp_id)
     except Employee.DoesNotExist:
         return HttpResponse(status=404)
 

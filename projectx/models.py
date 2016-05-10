@@ -33,9 +33,9 @@ class Menus(models.Model):
 		db_table = 'sys_menu'
 
 class Employee(models.Model):
-    slno = models.CharField(max_length=45)
+    slno = models.AutoField(primary_key=True)
     center_code = models.CharField(max_length=45)
-    emp_id = models.AutoField(primary_key=True)
+    emp_id = models.CharField(unique=True, max_length=20)
     id = models.CharField(unique=True, max_length=20)
     name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)
