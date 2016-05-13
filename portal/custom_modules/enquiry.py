@@ -44,16 +44,21 @@ fields.append({
     'fieldType':'radio',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2' ,
+    'fieldOptions': [
+        {'id': 'sex', 'name':'Male'}, 
+        {'id': 'sex', 'name':'Female'},
+        {'id': 'sex', 'name':'Transgender'}
+        ]
 })
 
 fields.append({
     'fieldName':'city',
     'fieldCaption':'City',
-    'fieldType':'string',
+    'fieldType':'textarea',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-6'
 })
 
 tabs.append({
@@ -94,17 +99,4 @@ table.append({
     'tabs':tabs,
     'actions':'',
     'pk':'slno'
-})
-
-
-
-
-
-
-
-
-    
-
-
-
-
+}) 
