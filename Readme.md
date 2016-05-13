@@ -26,20 +26,19 @@
 ###Install Django 1.9 +
 	pip install django
 
-###Install python dependencies
+###Install Application Dependencies
+	pip install -r requirments.txt
 
+###Mysql Installtion
+	sudo apt-get build-dep python-mysqldb
+	pip install mysql-python
+	mysql.server start
+	mysql -u root -p password
+	create database projectx;
 
-###Install Django Rest Framwork 3.0 +
-
+	python manage.py makemigrations projectxs
+	python manage.py migrate
 
 ###To Run django
 	python manage.py runserver
 
-###Mysql Installtion
-	pip install MySQL-python
-
-	create DB name as projectx
-
-	python manage.py makemigrations projectx
-
-	python manage.py migrate
