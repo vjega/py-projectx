@@ -47,7 +47,7 @@ portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', 'r
     vm.so_view = function(view){
         console.log("dhamu")
         renderTemplate.getJson(view);
-        renderData.getData(view);
+        /*renderData.getData(view);*/
     }
 
 }]);
@@ -64,7 +64,7 @@ portalApp.factory('renderTemplate',['$http',function ($http) {
     function getJson(view){
         $http.get('/portal/'+view)
             .success(function(data, status){
-                service.list.push(data)
+                service.list.push(data[0]);
             })
             .error(function (data, status) {
             console.log(data);

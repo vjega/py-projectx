@@ -58,7 +58,7 @@ fields.append({
     'fieldType':'textarea',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-6'
+    'fieldClass': 'col-md-2'
 })
 
 tabs.append({
@@ -78,11 +78,16 @@ fields.append({
 })
 
 fields.append({
-    'fieldName':'doj',
-    'fieldCaption':'Date of joining',
-    'fieldType':'date',
+    'fieldName':'dol',
+    'fieldCaption':'Date  joining',
+    'fieldType':'select',
     'fieldDefault':None,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldOptions': [
+        {'id': 'dol', 'name':'Chennai'}, 
+        {'id': 'dol', 'name':'Pune'},
+        {'id': 'dol', 'name':'Us'}
+        ]
 })
 
 tabs.append({
