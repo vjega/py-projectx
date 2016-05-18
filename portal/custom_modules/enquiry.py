@@ -1,6 +1,6 @@
 fields = []
 tabs = []
-table =[]
+table = []
 
 fields.append({
     'fieldName':'slno',
@@ -41,15 +41,16 @@ fields.append({
 fields.append({
     'fieldName':'sex',
     'fieldCaption':'Sex',
-    'fieldType':'radio',
+    'fieldType':'radio',   #'select', 
     'fieldDefault':1,
     'fieldConstrain':'pk',
     'fieldClass': 'col-md-2' ,
-    'fieldOptions': [
+    'fieldOptions': [        
         {'id': 'sex', 'name':'Male'}, 
         {'id': 'sex', 'name':'Female'},
         {'id': 'sex', 'name':'Transgender'}
         ]
+
 })
 
 fields.append({
@@ -74,20 +75,22 @@ fields.append({
     'fieldCaption':'Date of Birth',
     'fieldType':'date',
     'fieldDefault':1,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldClass': 'col-md-2'
 })
 
 fields.append({
-    'fieldName':'dol',
-    'fieldCaption':'Date  joining',
+    'fieldName':'doj',
+    'fieldCaption':'Date of joining',
     'fieldType':'select',
     'fieldDefault':None,
     'fieldConstrain':'pk',
     'fieldOptions': [
-        {'id': 'dol', 'name':'Chennai'}, 
-        {'id': 'dol', 'name':'Pune'},
-        {'id': 'dol', 'name':'Us'}
-        ]
+        {'id': 'doj', 'name':'Chennai'}, 
+        {'id': 'doj', 'name':'Pune'},
+        {'id': 'doj', 'name':'Us'}
+        ],
+    'fieldClass': 'col-md-2'
 })
 
 tabs.append({

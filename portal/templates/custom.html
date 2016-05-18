@@ -60,14 +60,12 @@
                     <uib-tabset  active="active">
                         <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
-                                <div class="form-group row" ng-repeat="elem in tabOneByOne.field">
-                                    <label  class="form-controll [[elem.fieldClass]]">[[elem.fieldCaption]] </label> 
-                                    
+                                <div  class="form-group row" ng-repeat="elem in tabOneByOne.field"
+                                ng-switch on="$index%3==0">
+                                    <label  class="form-controll [[elem.fieldClass]]">[[elem.fieldCaption]] </label>                                    
+                                    <field meta="elem" model="vm.empData"> </field>
 
-                                    <field meta="elem" > </field>
-
-                                    <!--
-                                    <div ng-if="elem.fieldType == 'string'">
+                            <!--    <div ng-if="elem.fieldType == 'string'">
                                         <input type="text" id="[[elem.id]]" class="[[elem.fieldClass]]" ng-model="vm.empData[0][elem.fieldName]"> 
                                     </div>
                                     <div ng-if="elem.fieldType == 'radio'">
@@ -93,7 +91,8 @@
                                             <option ng-repeat="item in elem.options track by $index" value="[[item.id]]">[[item.name]]</option>
                                         </select>
                                     </div>
-                                    <div class="row"></div> 
+                                    <div class="row">
+                                    </div> 
                                     -->
                                 </div>
                             </div>
