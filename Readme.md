@@ -32,8 +32,8 @@
 ###Mysql Installtion
 	sudo apt-get build-dep python-mysqldb
 	
-	if you got any mysql config file missing error install this lib
-	sudo apt-get install libmysqlclient-dev
+	(optional) If you got any mysql config file missing error install this lib
+		sudo apt-get install libmysqlclient-dev
 
 	mysql.server start
 	mysql -u root -p password
