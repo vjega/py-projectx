@@ -31,14 +31,21 @@
 
 ###Mysql Installtion
 	sudo apt-get build-dep python-mysqldb
-	pip install mysql-python
+	
+	(optional) If you got any mysql config file missing error install this lib
+		sudo apt-get install libmysqlclient-dev
+
 	mysql.server start
 	mysql -u root -p password
 	create database projectx;
-
+    
 	python manage.py makemigrations projectxs
 	python manage.py migrate
 
+
+
 ###To Run django
 	python manage.py runserver
+
+
 
