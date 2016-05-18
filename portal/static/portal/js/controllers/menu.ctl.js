@@ -1,4 +1,4 @@
-portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', function ($scope, $q ,$http, renderTemplate) {
+portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', 'renderData', function ($scope, $q ,$http, renderTemplate, renderData) {
     var vm = this;
 
     vm.menu = [];
@@ -15,7 +15,6 @@ portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', fu
     }
 
     function get_menu(){
-        console.log("dddddddddddddddddddddddddd")
         $http.get('/api/menus')
         .success(function (data, status) {
             vm.menu.push(data)
@@ -45,63 +44,58 @@ portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', fu
         console.log("******************");
     }
 
-
-   
-
     vm.so_view = function(view){
         console.log("dhamu")
         renderTemplate.getJson(view);
+        /*renderData.getData(view);*/
     }
 
-  
-
-   /* var resource = $resource('/api/menus');
-    $scope.example1 = resource.get();
-    console.log("rest", $scope.example1)*/
 }]);
 
+/*Factory to render template*/
 portalApp.factory('renderTemplate',['$http',function ($http) {
 
     var service = {
         getJson : getJson
-    }
+    };
 
     service.list = [];
-
 
     function getJson(view){
         $http.get('/portal/'+view)
             .success(function(data, status){
-                console.log("dattt", data)
-                service.list.push(data)
+                service.list.push(data[0]);
             })
             .error(function (data, status) {
             console.log(data);
         });
     }
 
-
-
-
     return service;
-        /*var service = {
-            getJson : getJson
-        }
 
-        return service;
+}]);
 
-        function getJson(){
-         return $http.get('/portal/enquiry')
-            .success(function (data, status) {
-                console.log("rrrrrrrrrrrrrrreeeeewwwwwwwww", data)
-            return data;
-        })
-        .error(function (data, status) {
+/*Factory to render data*/
+portalApp.factory('renderData',['$http',function ($http) {
+
+    var service = {
+        getData : getData
+    };
+
+    service.list = [];
+
+    function getData(view){
+        $http.get('/api/'+view)
+            .success(function(data, status){
+                service.list.push(data[0])
+            })
+            .error(function (data, status) {
             console.log(data);
         });
+    }
 
-    }*/
-
+    return service;
+       
 }]);
 
 

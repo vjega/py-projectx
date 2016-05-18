@@ -44,13 +44,18 @@ fields.append({
     'fieldType':'radio',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2' ,
+    'fieldOptions': [
+        {'id': 'sex', 'name':'Male'}, 
+        {'id': 'sex', 'name':'Female'},
+        {'id': 'sex', 'name':'Transgender'}
+        ]
 })
 
 fields.append({
     'fieldName':'city',
     'fieldCaption':'City',
-    'fieldType':'string',
+    'fieldType':'textarea',
     'fieldDefault':1,
     'fieldConstrain':'pk',
     'fieldClass': 'col-md-2'
@@ -73,11 +78,16 @@ fields.append({
 })
 
 fields.append({
-    'fieldName':'doj',
-    'fieldCaption':'Date of joining',
-    'fieldType':'date',
+    'fieldName':'dol',
+    'fieldCaption':'Date  joining',
+    'fieldType':'select',
     'fieldDefault':None,
-    'fieldConstrain':'pk'
+    'fieldConstrain':'pk',
+    'fieldOptions': [
+        {'id': 'dol', 'name':'Chennai'}, 
+        {'id': 'dol', 'name':'Pune'},
+        {'id': 'dol', 'name':'Us'}
+        ]
 })
 
 tabs.append({
@@ -94,17 +104,4 @@ table.append({
     'tabs':tabs,
     'actions':'',
     'pk':'slno'
-})
-
-
-
-
-
-
-
-
-    
-
-
-
-
+}) 

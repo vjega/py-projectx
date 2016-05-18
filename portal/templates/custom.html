@@ -10,11 +10,11 @@
                 <div>&nbsp;</div>
                 <div class="panel panel-primary">
                     <div class="panel-heading clearfix">  
-                        <div class="row"> 
+                        <div class="row">
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
                                 <div class="row">
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-left">
-                                        <b></b>
+                                        <b>[[vm.json_details[0].caption]]</b>
                                     </span>
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right">
                                     </span>                            
@@ -58,40 +58,43 @@
                     </div>
 
                     <uib-tabset  active="active">
-                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0]" heading="[[ tabOneByOne.tabCaption ]]">
+                        <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
-                                <div class="form-group row">
-                                    <!-- <div>[[vm.json_details]]</div> -->
-                                    <div ng-repeat="elem in tabOneByOne.field" > 
-                                        <label  class="form-controll [[elem.labelclass]]">[[elem.fieldCaption]]</label>
-                                        <div ng-if=" elem.fieldType == 'string' ">
-                                            <input type="text" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]" > 
-                                        </div>
-                                        <div ng-if="elem.fieldType == 'radio' ">
-                                            <div class="[[elem.class]]" ng-repeat = "item in elem.options track by $index">
-                                                <input type="radio" id="[[item.id]]" name="[[item.id]]" value="[[item.name]]" ng-model="vm.empData[elem.id]" />[[item.name]]
-                                            </div>
-                                        </div>
-                                        <div ng-if="elem.fieldType == 'checkbox' ">
-                                            <input type="checkbox" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]">
-                                        </div>
-                                        <div ng-if="elem.fieldType == 'date' ">
-                                            <p class="input-group [[elem.class]]">
-                                              <input type="text" class="form-control" uib-datepicker-popup="[[format]]" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
-                                              <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                              </span>
-                                            </p>
-                                        </div>
-                                        <div ng-if="elem.fieldType == 'select' ">
-                                            <select class="[[elem.class]]" ng-model="vm.empData[elem.id]"
-                                            
-                                            >
-                                                <option ng-repeat="item in elem.options track by $index" value="[[item.id]]">[[item.name]]</option>
-                                            </select>
-                                        </div>
-                                            <div class="row">
+                                <div class="form-group row" ng-repeat="elem in tabOneByOne.field">
+                                    <label  class="form-controll [[elem.fieldClass]]">[[elem.fieldCaption]] </label> 
+                                    
+
+                                    <field meta="elem" > </field>
+
+                                    <!--
+                                    <div ng-if="elem.fieldType == 'string'">
+                                        <input type="text" id="[[elem.id]]" class="[[elem.fieldClass]]" ng-model="vm.empData[0][elem.fieldName]"> 
                                     </div>
+                                    <div ng-if="elem.fieldType == 'radio'">
+                                        <div class="[[elem.class]]" ng-repeat = "item in elem.options track by $index">
+                                            <input type="radio" id="[[item.id]]" name="[[item.id]]" value="[[item.name]]" ng-model="vm.empData[elem.id]"/>[[item.name]]
+                                        </div>
+                                    </div>
+                                    <div ng-if="elem.fieldType == 'checkbox' ">
+                                        <input type="checkbox" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]">
+                                    </div>
+                                    <div ng-if="elem.fieldType == 'date' ">
+                                        <p class="input-group [[elem.class]]">
+                                          <input type="text" class="form-control" uib-datepicker-popup="[[format]]" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                                          <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                          </span>
+                                        </p>
+                                    </div>
+                                    <div ng-if="elem.fieldType == 'select' ">
+                                        <select class="[[elem.class]]" ng-model="vm.empData[elem.id]"
+                                        
+                                        >
+                                            <option ng-repeat="item in elem.options track by $index" value="[[item.id]]">[[item.name]]</option>
+                                        </select>
+                                    </div>
+                                    <div class="row"></div> 
+                                    -->
                                 </div>
                             </div>
                         </uib-tab>

@@ -26,7 +26,7 @@ def template_render(request, page_name):
         print '>>>>>>>>>>>>>>>>>>>>'
         # print jsodao.tabs       
         print '<<<<<<<<<<<<<<<<<<<<'
-        return HttpResponse(json.dumps(dao.tabs))
+        return HttpResponse(json.dumps(dao.table))
     except AttributeError as e:
         print('error')
 
