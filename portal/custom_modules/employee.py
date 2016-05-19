@@ -8,7 +8,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -17,7 +19,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -26,7 +30,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -35,7 +41,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -44,7 +52,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -53,7 +63,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -62,7 +74,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -71,7 +85,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -80,7 +96,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 tabs.append({
@@ -97,7 +115,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 fields.append({
     'fieldName':'mother_name',
@@ -105,7 +125,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 fields.append({
     'fieldName':'dob',
@@ -113,7 +135,9 @@ fields.append({
     'fieldType':'date',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -122,7 +146,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -131,7 +157,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -140,7 +168,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 tabs.append({
@@ -157,7 +187,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -166,7 +198,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -175,7 +209,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -184,7 +220,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -193,7 +231,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -202,7 +242,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -211,7 +253,9 @@ fields.append({
     'fieldType':'date',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -220,7 +264,9 @@ fields.append({
     'fieldType':'date',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 });
 
 fields.append({
@@ -229,7 +275,9 @@ fields.append({
     'fieldType':'date',
     'fieldDefault':'',
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 });
 
 tabs.append({

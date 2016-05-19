@@ -8,7 +8,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':1000,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'true'
 });
 
 fields.append({
@@ -17,7 +19,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 })
 
 fields.append({
@@ -26,7 +30,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 })
 
 fields.append({
@@ -35,7 +41,9 @@ fields.append({
     'fieldType':'string',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 })
 
 fields.append({
@@ -49,7 +57,9 @@ fields.append({
         {'id': 'sex', 'name':'Male'}, 
         {'id': 'sex', 'name':'Female'},
         {'id': 'sex', 'name':'Transgender'}
-        ]
+        ],        
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 
 })
 
@@ -59,7 +69,9 @@ fields.append({
     'fieldType':'textarea',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'false',
+    'fieldHidden' : 'false'
 })
 
 tabs.append({
@@ -76,7 +88,9 @@ fields.append({
     'fieldType':'date',
     'fieldDefault':1,
     'fieldConstrain':'pk',
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 })
 
 fields.append({
@@ -90,7 +104,9 @@ fields.append({
         {'id': 'doj', 'name':'Pune'},
         {'id': 'doj', 'name':'Us'}
         ],
-    'fieldClass': 'col-md-2'
+    'fieldClass': 'col-md-2',
+    'fieldDisabled' : 'true',
+    'fieldHidden' : 'false'
 })
 
 tabs.append({
@@ -106,5 +122,5 @@ table.append({
     'table':'employee',
     'tabs':tabs,
     'actions':'',
-    'pk':'slno'
+    'pk':'slno'    
 }) 
