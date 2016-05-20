@@ -17,13 +17,14 @@
                                         <b>[[vm.json_details[0].caption]]</b>
                                     </span>
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right">
+                                       Showing [[ vm.empData.length==0? vm.currentPos:vm.currentPos + 1 ]] of [[ vm.empData.length==0? 0: vm.empData[0].length ]] records 
                                     </span>                            
                                 </div>
                             </div> 
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right"> 
                              <div class="row">       
                               <span class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pull-right">
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.firstRecord()">
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.activate()">
                                     <i class="fa fa-print icon-color"></i>
                                 </a>
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.searchRecord()">
@@ -39,7 +40,7 @@
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.editRecord()">
                                     <i class="fa fa-pencil icon-color"></i>
                                 </a>
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.firstRecord()">
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.first()" >
                                     <i class="fa fa-fast-backward icon-color"></i>
                                 </a>
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()" >
@@ -48,7 +49,7 @@
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.next()" >
                                     <i class="fa fa-forward icon-color"></i>
                                 </a>
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.lastRecord()">
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.last()" >
                                     <i class="fa fa-fast-forward icon-color"></i>
                                 </a>  
                               </span>                                
@@ -62,8 +63,8 @@
                             <div class="panel-body">
                                 <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
                                 <!-- ng-switch on="$index%3==0" -->
-                                    <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] </label>                                    
-                                    <field meta="elem" model="vm.empData"> </field>
+                                    <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]
+                                    <field meta="elem" model="vm.empData[0][vm.currentPos ]"> </field>
 
                             <!--    <div ng-if="elem.fieldType == 'string'">
                                         <input type="text" id="[[elem.id]]" class="[[elem.fieldClass]]" ng-model="vm.empData[0][elem.fieldName]"> 

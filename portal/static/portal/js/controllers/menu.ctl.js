@@ -46,8 +46,9 @@ portalApp.controller('sidemenuCtl',['$scope', '$q', '$http','renderTemplate', 'r
 
     vm.so_view = function(view){
         console.log("dhamu")
+        console.log(view);
         renderTemplate.getJson(view);
-        /*renderData.getData(view);*/
+        renderData.getData(view);
     }
 
 }]);
@@ -64,11 +65,12 @@ portalApp.factory('renderTemplate',['$http',function ($http) {
     function getJson(view){
         $http.get('/portal/'+view)
             .success(function(data, status){
-                service.list.push(data[0]);
+                service.list.splice(0);
+                service.list.push(data[0]);                
             })
             .error(function (data, status) {
             console.log(data);
-        });
+        });    
     }
 
     return service;
@@ -87,16 +89,18 @@ portalApp.factory('renderData',['$http',function ($http) {
     function getData(view){
         $http.get('/api/'+view)
             .success(function(data, status){
-                service.list.push(data[0])
+                service.list.splice(0);
+                service.list.push(data);                
+                //console.log(service.list[0][1]);                
             })
             .error(function (data, status) {
             console.log(data);
         });
     }
-
-    return service;
-       
+    return service;       
 }]);
+
+
 
 
 

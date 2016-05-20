@@ -195,7 +195,7 @@ fields.append({
 fields.append({
     'fieldName':'designation',
     'fieldCaption':'Designation',
-    'fieldType':'string',
+    'fieldType':'textarea',
     'fieldDefault':'',
     'fieldConstrain':'pk',
     'fieldClass': 'col-md-2',
