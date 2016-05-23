@@ -58,11 +58,76 @@
                         </div>             
                     </div>
 
-                    <uib-tabset  active="active">
+                    
+
+
+                    <uib-tabset  active="active"> 
+                    
+                    
+                    <!-- Box model to display data as list or table -->
+                    <div ng-show="vm.toggle"> 
+                        <div class="box box-solid"> <!-- .box -->
+                            <div class="box-header with-border">
+                                <h3 class="box-title" > [[vm.json_details[0].caption]] 
+                                <span ng-hide="vm.json_details[0].caption == undefined">
+                                <span ng-hide="toggle">List</span>
+                                <span ng-show="toggle">Table</span>
+                                </span>
+                                </h3>
+                                <div class="box-tools">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body no-padding">
+                                <table ng-show="toggle" st-table="vm.empData[0]"  class="table table-striped">
+                                    <thead>
+                                        <!-- <tr><th><input st-search="id" placeholder="search for employee id" class="input-sm form-control" type="search"/>  </th><th colspan="5"><input st-search placeholder="global search" class="input-sm form-control" type="search"/></th></tr> -->
+                                        <tr>
+                                            <th>Employee Id</th>
+                                            <th>Employee Name</th>
+                                            <th>DateOfBirth</th>
+                                            <th>Designation</th>
+                                            <th>Sex</th>
+                                            <th>Location</th>
+                                        </tr>          
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in vm.empData[0]">
+                                            <td>[[row.id]]</td>
+                                            <td>[[row.name]]</td>
+                                            <td>[[row.dob]]</td>
+                                            <td>[[row.designation]]</td>
+                                            <td>[[row.sex]]</td>
+                                            <td>[[row.center_code]]</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center"><div  st-items-by-page="20" st-pagination=""></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <ul ng-hide="toggle" class="nav nav-pills nav-stacked">
+                                    <li ng-repeat="row in vm.empData[0] "><a href="#" ng-click="">
+                                    <div class="row">
+                                        <div class="form-controll col-md-2"><b>[[row.emp_id]] [[row.name ]]</b> [[ row.id ]]
+                                        </div>
+                                        <div class="col-md-8">       [[row.designation]]
+                                        </div>
+                                        <div class="col-md-2">[[row.dob]]
+                                        </div>
+                                    </div></a>
+                                    </li>
+                                </ul>
+                            </div><!-- /.box-body -->
+                        </div><!-- /. box -->
+                    </div>
+
+
                         <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
                                 <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
-                                <!-- ng-switch on="$index%3==0" -->
                                     <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]
                                     <field meta="elem" model="vm.empData[0][vm.currentPos ]"> </field>
 
