@@ -8,7 +8,7 @@ portalApp.controller('dashboardCtl',['$scope', 'renderTemplate', '$q', 'renderDa
 
     vm.empData = renderData.list;
 
-    vm.toggle = true;
+    vm.toggle = false;
 
     /* Navigation first, last, next and previous controls based on currentPos */
     vm.currentPos = 0;  
