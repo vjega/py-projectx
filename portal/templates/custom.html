@@ -106,31 +106,38 @@
                                 <!-- To display all data as LIST -->
                                 <ul ng-hide="toggle" class="nav nav-pills nav-stacked" >
                                     <li ng-repeat="row in vm.empData[0]" ng-if="field.fieldHidden!='true'" ><a href="#" ng-click="" >
-                                    <!-- Cool Hari ! For dynamic fields list --><!--
+                                    <!-- Cool Hari ! For dynamic fields list -->
+                                    <!--
                                     <div ng-repeat="field in fieldTab.field" class="row">
                                     [[ row[field.fieldName] ]]
                                     </div> -->
-                                        <div class="card"> 
-                                            <div class="card-block">
-                                               <h4 class="card-title">
-                                               <b> Mr|Ms. [[row.name | uppercase]]</b>
-                                               </h4>
-                                               <p class="card-text">
-                                                Designation: [[row.designation]]
-                                               </p>
-                                               <p class="card-text">
-                                                Client : [[row.client_name | uppercase ]]
-                                               </p>
-                                            </div>
+                                    <!-- . Style 1  -->
+                                    <div class="card" >
+                                        <div class="card-block" style="box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 10px 0 rgba(0, 0, 0, 0.12);" align="center">
+                                            <h4 class="card-title">
+                                            <b> 
+                                            <span ng-if="row.sex=='male'">Mr. </span>
+                                            <span ng-if="row.sex=='female'">Ms. 
+                                            </span> 
+                                            <span ng-if="row.sex=='' || row.sex=='other'">Mr|Ms. 
+                                            </span> 
+                                             [[row.name | uppercase]]</b>
+                                            </h4>
+                                            <p class="card-text">
+                                            Designation: [[row.designation]]
+                                            </p>
+                                            <p class="card-text text-muted">
+                                            Client : [[row.client_name | uppercase ]]
+                                            </p>
                                         </div>
+                                    </div>
+                                    <!-- / .Style 1 end -->
                                     </a>
                                     </li>
                                 </ul>
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
                     </div>
-
-
                         <uib-tab  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
                                 <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
@@ -230,12 +237,67 @@
 
 
 
+<!-- Card with material style  -->
+<style type="text/css">
+/*
+.card {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.card {
+  margin-top: 10px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-clip: padding-box;
+}
+.card span.card-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
 
-<!-- 
-<div class="form-controll col-md-2"><b>[[row.name ]]</b> [[ row.id ]]
-                                        </div>
-                                        <div class="col-md-4">       [[row.designation]]
-                                        </div>
-                                        <div class="col-md-4">       [[row.project]]
-                                        </div> 
--->
+.card .card-image {
+  position: relative;
+  overflow: hidden;
+}
+.card .card-image img {
+  border-radius: 2px 2px 0 0;
+  background-clip: padding-box;
+  position: relative;
+  z-index: -1;
+}
+.card .card-image span.card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 16px;
+}
+.card .card-content {
+  padding: 16px;
+  border-radius: 0 0 2px 2px;
+  background-clip: padding-box;
+  box-sizing: border-box;
+}
+.card .card-content p {
+  margin: 0;
+  color: inherit;
+}
+.card .card-content span.card-title {
+  line-height: 48px;
+}
+.card .card-action {
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding: 16px;
+}
+.card .card-action a {
+  color: #ffab40;
+  margin-right: 16px;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}
+.card .card-action a:hover {
+  color: #ffd8a6;
+  text-decoration: none;
+}
+*/
+</style>
