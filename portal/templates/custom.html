@@ -84,8 +84,8 @@
                                  class="table table-striped">
                                     <thead>
                                         <tr >
-                                            <th ng-repeat="field in fieldTab.field track by $index  " ng-if="$index<=5" st-sort="field.fieldName">[[ field.fieldCaption]]</th>
-                                        </tr>          
+                                            <th ng-repeat="field in fieldTab.field track by $index "  st-sort="field.fieldName">[[ field.fieldCaption]]</th>
+                                        </tr>           
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="row in rowCollection">
@@ -93,14 +93,16 @@
                                         </tr> 
                                     </tbody>
                                     <tfoot>
+                                        <!-- 
                                         <tr>
                                             <td colspan="5" class="text-center">
                                                 <div st-pagination="true" st-items-by-page="25"
                                                 st-template='' 
                                                 ></div>
-                                            <!-- st-displayed-pages="7" -->
+                                             // st-displayed-pages="7" 
                                             </td>
-                                        </tr>
+                                        </tr> 
+                                        -->
                                     </tfoot>
                                 </table>
                                 <!-- To display all data as LIST -->
