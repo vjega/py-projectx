@@ -1,0 +1,17 @@
+ .card-title-title{
+    font-weight: bold;
+ }
+
+.card-title-info {
+    display: block;
+    padding: 1px 0;
+}
+
+.icon-color{
+    color:#FFF;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
