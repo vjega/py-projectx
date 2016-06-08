@@ -1,6 +1,9 @@
+from employee_doc import table as tt
 fields = []
 tabs = []
 table =[]
+actions =[]
+tabs_set = []
 
 fields.append({
     'fieldName':'center_code',
@@ -286,12 +289,73 @@ tabs.append({
     'field':fields
 })
 
+tabs_set.insert(0, tabs) 
+
+tabs = []
+tabs.append({
+    'id' : 'employee_doc',
+    'name' : 'Document',
+    'type' : 'list',
+    'filename' : tt #'employee_doc'
+})
+tabs.append({
+    'id' : 'employee_visa',
+    'name' : 'Visa',
+    'type' : 'list',
+    'filename' : 'employee_visa'
+})
+tabs.append({
+    'id' : 'emp_experience',
+    'name' : 'Experience',
+    'type' : 'list',
+    'filename' : 'emp_experience'
+})
+
+#print tabs 
+
+tabs_set.insert(1,tabs)
+
+actions.append({
+    'id' : 'set_password',
+    'name' : 'Set Password',
+    'class' : 'btn-primary',
+    'params' : 'emp_id,emp_name',
+    'action_method' : 'vm.save_password()'
+})
+
+actions.append({
+    'id' : 'Almuni',
+    'name' : 'Alumni',
+    'class' : 'btn-primary',
+    'params' : 'emp_id,emp_name',
+    'action_method' : 'vm.change_alumni()'
+})
+
+actions.append({
+    'id' : 'generate_appraisal',
+    'name' : 'Generate Appraisal',
+    'class' : 'btn-info',
+    'params' : 'emp_id,emp_name',
+    'action_method' : 'vm.generate_appraisal()'
+})
+
+actions.append({
+    'id' : 'generate_payslip',
+    'name' : 'Generate Payslip',
+    'class' : 'btn-danger',
+    'params' : 'emp_id,emp_name',
+    'action_method' : 'vm.generate_payslip()'
+})
+
 table.append({
     'id':27,
     'name':'Employee',
     'caption':'Employee',
     'table':'employee',
-    'tabs':tabs,
-    'actions':'',
+    # 'tabs':tabs,
+    'tabs':tabs_set,
+    'actions':actions,
     'pk':'slno'
 })
+# print tabs_set[0]
+

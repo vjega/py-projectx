@@ -17,7 +17,7 @@
                                         <b>[[vm.json_details[0].caption]]</b>
                                     </span>
                                     <span class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pull-right" ng-if="!toggle">
-                                       Showing [[ vm.empData[0].length ==0 ? vm.currentPos : vm.currentPos+1 ]] of [[ vm.empData.length==0? 0: vm.empData[0].length ]] records 
+                                       Showing [[ vm.empData.length ==0 ? vm.currentPos : vm.currentPos+1 ]] of [[ vm.empData.length==0? 0: vm.empData[0].length ]] records 
                                     </span>                            
                                 </div>
                             </div> 
@@ -66,7 +66,7 @@
 
                     <!-- Box model to display data as list or table -->
                     <div ng-show="vm.toggle"> 
-                        <div ng-if="toggle" class="box box-solid"> <!-- .box -->
+                        <div ng-if="toggle && !vm.isEmployee" class="box box-solid"> <!-- .box -->
                             <!--
                             <div class="box-header with-border">
                                 <h3 class="box-title" > [[vm.json_details[0].caption]] 
@@ -84,7 +84,8 @@
                                 <!-- To display all data as LIST -->
                                 <ul ng-show="toggle" class="nav nav-pills nav-stacked" >
                                     <li ng-repeat="row in vm.empData[0]" ng-if="field.fieldHidden != 'true'" >
-                                    <a href="#" ng-click="vm.hello( row.emp_id )"  >
+                                    <a href="#" ng-click="vm.fetch( row.emp_id)" >
+
                                     <!-- Cool Hari ! For dynamic fields list -->
                                     <!--<div ng-repeat="field in fieldTab.field" class="row"> [[ row[field.fieldName] ]] </div> -->
                                     <!-- . Style 1  -->
@@ -104,7 +105,7 @@
                                                 <span class="card-text card-title-info">
                                                  Client : [[row.client_name | uppercase ]]
                                                 </span>
-                                        </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- / .Style 1 end -->
@@ -114,42 +115,22 @@
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
                     </div>
-                        <uib-tab ng-if="!toggle"  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs" heading="[[ tabOneByOne.tabCaption ]]">
+                        <!-- To select a particular Item to edit from List view -->
+                        <uib-tab ng-if="vm.isEmployee"  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs[0]" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
                                 <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
                                     <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]
+                                    
+                                    <field meta="elem" model="vm.employee"> </field>                                   
+                                </div>
+                            </div>
+                        </uib-tab> 
+                        <uib-tab ng-if="!toggle"  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs[0]" heading="[[ tabOneByOne.tabCaption ]]">
+                            <div class="panel-body">
+                                <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
+                                    <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]
+                                    
                                     <field meta="elem" model="vm.empData[0][vm.currentPos ]"> </field>
-
-                                    <!--
-                                    <div ng-if="elem.fieldType == 'string'">
-                                        <input type="text" id="[[elem.id]]" class="[[elem.fieldClass]]" ng-model="vm.empData[0][elem.fieldName]"> 
-                                    </div>
-                                    <div ng-if="elem.fieldType == 'radio'">
-                                        <div class="[[elem.class]]" ng-repeat = "item in elem.options track by $index">
-                                            <input type="radio" id="[[item.id]]" name="[[item.id]]" value="[[item.name]]" ng-model="vm.empData[elem.id]"/>[[item.name]]
-                                        </div>
-                                    </div>
-                                    <div ng-if="elem.fieldType == 'checkbox' ">
-                                        <input type="checkbox" id="[[elem.id]]" class="[[elem.class]]" ng-model="vm.empData[elem.id]">
-                                    </div>
-                                    <div ng-if="elem.fieldType == 'date' ">
-                                        <p class="input-group [[elem.class]]">
-                                          <input type="text" class="form-control" uib-datepicker-popup="[[format]]" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
-                                          <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                          </span>
-                                        </p>
-                                    </div>
-                                    <div ng-if="elem.fieldType == 'select' ">
-                                        <select class="[[elem.class]]" ng-model="vm.empData[elem.id]"
-                                        
-                                        >
-                                            <option ng-repeat="item in elem.options track by $index" value="[[item.id]]">[[item.name]]</option>
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                    </div> 
-                                    -->
                                 </div>
                             </div>
                         </uib-tab>
@@ -160,15 +141,42 @@
     </section>
 </section>
 
+<section>
+    <div class="row">
+        <div class="col-md-12"> 
+            <div class="panel panel-primary">
+                <div class="panel-heading clearfix">  
+                    <div class="col-md-6">
+                        <span class="col-md-6">
+                            <b>View</b>
+                        </span>                            
+                    </div> 
+                </div>
+                <uib-tabset active="active" >
+                    <uib-tab ng-repeat=" tabOneByOne in vm.json_details[0].tabs[1]" heading="[[ tabOneByOne.name ]]" >
+                        <div ng-repeat="tab in tabOneByOne.filename.tabs" > 
+                            [[tab.fieldCaption]]
+                        </div>
+                    </uib-tab>                    
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2 pull-right" ng-repeat="action in vm.json_details[0].actions">
+                <button type="button" class="btn btn-block [[action.class]] btn-sm " id= "[[action.id]]" ng-click="[[action.action_method]]"> [[action.name]]</button>
+            </div>
+        </div>
+    </div>
+</section>
 
 </div>
 </section>
 </div>
-
-<style type="text/css">
-
-</style>
-
 
 <!-- Content Wrapper. Contains page content -->
 <!-- <div class="content-wrapper">
@@ -204,116 +212,3 @@
               </div> -->
 {%endblock%}
 
-
-
-<!-- Card with material style  -->
-<style type="text/css">
-/*
-.card {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.card {
-  margin-top: 10px;
-  box-sizing: border-box;
-  border-radius: 2px;
-  background-clip: padding-box;
-}
-.card span.card-title {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 300;
-    text-transform: uppercase;
-}
-
-.card .card-image {
-  position: relative;
-  overflow: hidden;
-}
-.card .card-image img {
-  border-radius: 2px 2px 0 0;
-  background-clip: padding-box;
-  position: relative;
-  z-index: -1;
-}
-.card .card-image span.card-title {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 16px;
-}
-.card .card-content {
-  padding: 16px;
-  border-radius: 0 0 2px 2px;
-  background-clip: padding-box;
-  box-sizing: border-box;
-}
-.card .card-content p {
-  margin: 0;
-  color: inherit;
-}
-.card .card-content span.card-title {
-  line-height: 48px;
-}
-.card .card-action {
-  border-top: 1px solid rgba(160, 160, 160, 0.2);
-  padding: 16px;
-}
-.card .card-action a {
-  color: #ffab40;
-  margin-right: 16px;
-  transition: color 0.3s ease;
-  text-transform: uppercase;
-}
-.card .card-action a:hover {
-  color: #ffd8a6;
-  text-decoration: none;
-}
-*/
-</style>
-
-
-
-            <!-- ng-repeat="fieldTab in vm.json_details[0].tabs"-->
-                                <!-- To display all data as S-Table -->
-                                <!--
-                                <table ng-show="toggle" st-table="rowCollection" st-safe-src="vm.empData[0]"
-                                 class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th st-sort="emp_id">Employee ID</th>
-                                            <th st-sort="name">Name</th>
-                                            <th st-sort="center_code">Center code</th>
-                                -->
-                                            <!-- <th ng-repeat="field in fieldTab.field track by $index "  st-sort="field.fieldName">[[ field.fieldCaption]]</th> -->
-                                <!--
-                                        </tr>           
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="row in rowCollection">
-                                            <td> [[ row['emp_id'] ]]
-                                            </td>
-                                            <td> [[ row['name'] ]]
-                                            </td>
-                                            <td> [[ row['center_code'] ]]
-                                            </td>
-                                -->
-                                            <!--
-                                            <td ng-repeat="field in fieldTab.field" ng-if="field.fieldHidden!='true'" > [[ row[field.fieldName] ]]</td>
-                                            -->
-                                <!--
-                                        </tr> 
-                                    </tbody>
-                                    <tfoot>
-                                        
-                                        <tr>
-                                            <td colspan="5" class="text-center">
-                                                <div st-pagination="true" st-items-by-page="25"
-                                                st-template='' 
-                                                ></div>
-                                             // st-displayed-pages="7" 
-                                            </td>
-                                        </tr> 
-                                        
-                                    </tfoot>
-                                </table>
-                                -->
