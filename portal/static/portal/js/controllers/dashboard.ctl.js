@@ -1,4 +1,4 @@
-portalApp.controller('dashboardCtl',['$scope', 'renderTemplate', '$q', 'renderData', function ($scope, renderTemplate, $q, renderData,renderTotalRecord) {
+portalApp.controller('dashboardCtl',['$scope','renderTemplate', '$q', 'renderData', function ($scope, renderTemplate, $q, renderData,renderTotalRecord) {
 
     /*jshint validthis: true */
     
@@ -31,7 +31,9 @@ portalApp.controller('dashboardCtl',['$scope', 'renderTemplate', '$q', 'renderDa
     	vm.currentPos = vm.empData[0].length - 1;
     }
 
-
+    vm.hello = function(req){    	
+    	itemsModel.fetch(req);
+    }
 
 }]);
 

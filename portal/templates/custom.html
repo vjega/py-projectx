@@ -83,30 +83,28 @@
                             <div class="box-body no-padding" >
                                 <!-- To display all data as LIST -->
                                 <ul ng-show="toggle" class="nav nav-pills nav-stacked" >
-                                    <li ng-repeat="row in vm.empData[0]" ng-if="field.fieldHidden != 'true'" ><a href="#" ng-click="" >
+                                    <li ng-repeat="row in vm.empData[0]" ng-if="field.fieldHidden != 'true'" >
+                                    <a href="#" ng-click="vm.hello( row.emp_id )"  >
                                     <!-- Cool Hari ! For dynamic fields list -->
-                                    <!--
-                                    <div ng-repeat="field in fieldTab.field" class="row">
-                                    [[ row[field.fieldName] ]]
-                                    </div> -->
+                                    <!--<div ng-repeat="field in fieldTab.field" class="row"> [[ row[field.fieldName] ]] </div> -->
                                     <!-- . Style 1  -->
-                                    <div class="card" >
-                                        <div class="card-block" style="box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 10px 0 rgba(0, 0, 0, 0.12);">
-                                            <h6 class="card-title">
-                                            <b> 
-                                            <span ng-if="row.sex=='male'">&nbsp;Mr. </span>
-                                            <span ng-if="row.sex=='female'">&nbsp;Ms. 
-                                            </span> 
-                                            <span ng-if="row.sex=='' || row.sex=='other'">&nbsp;Mr|Ms. 
-                                            </span> 
-                                             [[row.name | uppercase]]</b>
-                                            </h6>
-                                            <p class="card-text">
-                                            &nbsp;Designation: [[row.designation]]
-                                            </p>
-                                            <p class="card-text text-muted">
-                                            &nbsp;Client : [[row.client_name | uppercase ]]
-                                            </p>
+                                    <div class="card" style="box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.16), 0 5px 10px 0 rgba(0, 0, 0, 0.12); padding:10px;" >
+                                        <div class="card-block" >
+                                            <div class="card-title ">
+                                                <span  class="card-title-title" ng-if="row.sex=='male'">Mr. </span>
+                                                <span  class="card-title-title" ng-if="row.sex=='female'">Ms. </span> 
+                                                <span  class="card-title-title" ng-if="row.sex=='' || row.sex=='other'"> Mr|Ms. </span> 
+                                                <span class="card-title-title" > [[row.name | uppercase]] </span>
+                                                <span class="card-text card-title-info">
+                                                 Designation: [[row.designation]]
+                                                </span>
+                                                <span class="card-text card-title-info">
+                                                 Center code: [[row.center_code]]
+                                                </span>
+                                                <span class="card-text card-title-info">
+                                                 Client : [[row.client_name | uppercase ]]
+                                                </span>
+                                        </div>
                                         </div>
                                     </div>
                                     <!-- / .Style 1 end -->
@@ -168,14 +166,7 @@
 </div>
 
 <style type="text/css">
-    .icon-color{
-        color:#FFF;
-    }
-    .disabled {
-        pointer-events: none;
-        cursor: default;
-    }
-    
+
 </style>
 
 

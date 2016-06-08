@@ -100,6 +100,23 @@ portalApp.factory('renderData',['$http',function ($http) {
     return service;       
 }]);
 
+/*Factory to render data*/
+portalApp.factory('renderEmpData',['$http',function ($http) {    
+    var myData={getData:getData};
+
+    function getData(view){
+        $http.get('/api/employee/'+view)
+            .success(function(data, status){
+                myData = data.data;
+                //console.log(service.list[0][1]);                
+            })
+            .error(function (data, status) {
+            console.log(data);
+        });
+    }
+    return myData;       
+}]);
+
 
 
 
