@@ -1,4 +1,4 @@
-from employee_doc import table as tt
+from employee_doc import table as doc_table
 fields = []
 tabs = []
 table =[]
@@ -296,7 +296,7 @@ tabs.append({
     'id' : 'employee_doc',
     'name' : 'Document',
     'type' : 'list',
-    'filename' : tt #'employee_doc'
+    'filename' : doc_table #'employee_doc'
 })
 tabs.append({
     'id' : 'employee_visa',
@@ -311,7 +311,7 @@ tabs.append({
     'filename' : 'emp_experience'
 })
 
-#print tabs 
+print doc_table 
 
 tabs_set.insert(1,tabs)
 

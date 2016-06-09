@@ -128,8 +128,7 @@
                         <uib-tab ng-if="!toggle"  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs[0]" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
                                 <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
-                                    <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]
-                                    
+                                    <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]                                   
                                     <field meta="elem" model="vm.empData[0][vm.currentPos ]"> </field>
                                 </div>
                             </div>
@@ -140,34 +139,44 @@
         </div>
     </section>
 </section>
-
+<!-- Section for View Documents, such as Experience, Visa & etc -->
 <section>
     <div class="row">
         <div class="col-md-12"> 
             <div class="panel panel-primary">
                 <div class="panel-heading clearfix">  
-                    <div class="col-md-6">
-                        <span class="col-md-6">
-                            <b>View</b>
+                    <div class="col-md-12">
+                        <span class="col-md-12 pull-left">
+                            View
                         </span>                            
                     </div> 
                 </div>
                 <uib-tabset active="active" >
-                    <uib-tab ng-repeat=" tabOneByOne in vm.json_details[0].tabs[1]" heading="[[ tabOneByOne.name ]]" >
-                        <div ng-repeat="tab in tabOneByOne.filename.tabs" > 
-                            [[tab.fieldCaption]]
-                        </div>
+                    <uib-tab index="$index + 1" ng-repeat=" tabOneByOne in vm.json_details[0].tabs[1]" heading="[[ tabOneByOne.name ]]" >
+                        <div class="panel-body ">
+                             <!-- [[ tabOneByOne.filename ]]   -->
+                            <div class="form-group " ng-repeat="elem in tabOneByOne.filename">
+                               <div class="form-group " ng-repeat="item in elem.tabs">
+                                    <div class="form-group row " ng-repeat="it in item.field">
+                                        <label class="form-controll [[it.fieldClass]]"  ng-hide="it.fieldHidden=='true'">[[it.fieldCaption]] 
+                                        </label>
+                                        <field meta="it" model="" > 
+                                        </field>
+                                    </div>
+                               </div>
+                            </div>  
+                        </div>    
                     </uib-tab>                    
                 </uib-tabset>
             </div>
         </div>
     </div>
 </section>
-
+<!-- Section for ACTIONS (control) --> 
 <section>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2 pull-right" ng-repeat="action in vm.json_details[0].actions">
+            <div class="col-md-2 col-sm-2 col-lg-2 pull-right" ng-repeat="action in vm.json_details[0].actions">
                 <button type="button" class="btn btn-block [[action.class]] btn-sm " id= "[[action.id]]" ng-click="[[action.action_method]]"> [[action.name]]</button>
             </div>
         </div>
