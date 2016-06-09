@@ -6,8 +6,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
-from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group
-from projectx.serializers import MenuSerializer, EmployeeSerializer, CandidateSerializer, AssetsSerializer, DocumentsSerializer , ProjectsSerializer, CoursesSerializer, CircularsSerializer, ReportingSerializer, LocationSerializer, CompanySettingsSerializer, UserSerializer, GroupSerializer
+from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group, EmpDocuments
+from projectx.serializers import MenuSerializer, EmployeeSerializer, CandidateSerializer, AssetsSerializer, DocumentsSerializer , ProjectsSerializer, CoursesSerializer, CircularsSerializer, ReportingSerializer, LocationSerializer, CompanySettingsSerializer, UserSerializer, GroupSerializer, EmpDocumentsSerializer
 
 class JSONResponse(HttpResponse):
     """
@@ -542,8 +542,48 @@ def group_detail(request, group_id):
         location.delete()
         return HttpResponse(status=204)
 
+@api_view(['GET', 'POST'])
+def emp_documents_list(request):
+    """
+    List all EmpDocuments, or create a new snippet.
+    """
+    if request.method == 'GET':
+        empdocuments = EmpDocuments.objects.all()
+        serializer = EmpDocumentsSerializer(empdocuments, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = EmpDocumentsSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+def emp_documents_detail(request, emp_id):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        empdocuments = EmpDocuments.objects.get(emp_id=emp_id)
+    except EmpDocuments.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = EmpDocumentsSerializer(empdocuments)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = EmpDocumentsSerializer(empdocuments, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        empdocuments.delete()
+        return HttpResponse(status=204)
 
 
 

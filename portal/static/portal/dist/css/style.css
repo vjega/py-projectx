@@ -1,3 +1,23 @@
+.navbar-logo>span {
+  max-height: 100%;
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+  padding: 0px;
+  /* probably not needed anymore, but doesn't hurt */
+  -o-object-fit: contain;
+  object-fit: contain; 
+}
+.navbar-logo>img {
+  max-height: 100%;
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+  padding: 0px;
+  /* probably not needed anymore, but doesn't hurt */
+  -o-object-fit: contain;
+  object-fit: contain; 
+}
 .card-title-title{
     font-weight: bold;
  }
@@ -14,6 +34,9 @@
 .disabled {
     pointer-events: none;
     cursor: default;
+}
+.logo{
+  background-color: #fff;
 }
 
 

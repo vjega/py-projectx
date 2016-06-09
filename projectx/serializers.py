@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group
+from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group, EmpDocuments
 
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -67,3 +67,8 @@ class GroupSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Group
 		fields = ('slno','group_name','group_id','status')
+
+class EmpDocumentsSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = EmpDocuments
+		fields = ('slno','code','name','course','emp_id','line_no_field','doc_type','doc_file','upload_date','remarks','hr_remarks','in_hand','return_date','verified','returned')

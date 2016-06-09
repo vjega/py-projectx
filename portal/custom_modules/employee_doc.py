@@ -3,8 +3,8 @@ tabs = []
 table =[]
 
 fields.append({
-    'fieldName':'center_code',
-    'fieldCaption':'Center code',
+    'fieldName':'emp_id',
+    'fieldCaption':'Employee Id',
     'fieldType':'string',
     'fieldDefault':'',
     'fieldConstrain':'pk',

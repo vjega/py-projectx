@@ -377,4 +377,26 @@ class Group(models.Model):
         managed = True
         db_table = 'sys_group'
 
+# Employee <- === -> Documents
 
+class EmpDocuments(models.Model):
+    slno = models.AutoField(primary_key=True)
+    code = models.CharField(max_length=60)
+    name = models.CharField(max_length=60)
+    course = models.CharField(max_length=12)
+    emp_id = models.CharField(max_length=100)
+    line_no_field = models.IntegerField(db_column='line_no_')  # Field renamed because it ended with '_'.
+    doc_type = models.CharField(max_length=5)
+    doc_file = models.CharField(max_length=100)
+    upload_date = models.DateField()
+    remarks = models.CharField(max_length=240)
+    hr_remarks = models.CharField(max_length=240)
+    in_hand = models.CharField(max_length=8)
+    return_date = models.DateField()
+    verified = models.IntegerField()
+    returned = models.IntegerField()
+    ts = models.DateTimeField()
+
+    class Meta:
+        managed = True
+        db_table = 'emp_documents'

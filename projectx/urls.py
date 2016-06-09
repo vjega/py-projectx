@@ -5,6 +5,8 @@ from projectx import views
 urlpatterns = [
     url(r'^menus/$', views.menu_list),
     url(r'^employee/$', views.employee_list),
+    url(r'^emp_docs/$', views.emp_documents_list),
+    url(r'^emp_docs/(?P<emp_id>[\w\-]+)/$', views.emp_documents_detail),
     url(r'^employee/(?P<emp_id>[\w\-]+)/$', views.employee_detail),
     url(r'^candidate/$', views.candidate_list),
     url(r'^candidate/(?P<id>[\w\-]+)/$', views.candidate_detail),

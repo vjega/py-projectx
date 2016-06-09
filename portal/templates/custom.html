@@ -25,34 +25,34 @@
                              <div class="row">       
                               <span class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pull-right">
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.activate()">
-                                    <i class="fa fa-print icon-color"></i>
+                                    <i class="fa fa-print icon-color text-gray"></i>
                                 </a>
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.searchRecord()">
-                                    <i class="fa fa-search icon-color"></i>
+                                    <i class="fa fa-search icon-color "></i>
                                 </a>
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()">
                                     <i class="fa fa-trash-o icon-color"></i>
                                 </a>
                                 <div ng-click="vm.toggle=true">
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="toggle= !toggle" tooltip="Next">
-                                    <i ng-show="toggle" class="fa fa-table icon-color"></i>
-                                    <i ng-hide="toggle" class="fa fa-list-ul  icon-color"></i>
+                                    <i ng-show="toggle" class="fa fa-table icon-color "></i>
+                                    <i ng-hide="toggle" class="fa fa-list-ul  icon-color "></i>
                                 </a>
                                 </div>
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.editRecord()">
-                                    <i class="fa fa-pencil icon-color"></i>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.editRecord(); vm.isSave=!vm.isSave ">
+                                    <i class="fa fa-pencil icon-color "></i>
                                 </a>
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.first()" >
-                                    <i class="fa fa-fast-backward icon-color"></i>
+                                    <i class="fa fa-fast-backward icon-color " ng-class="{ 'text-light-blue': vm.currentPos==0 }"></i>
                                 </a>
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()" >
-                                    <i class="fa fa-backward icon-color" ng-cl></i> 
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()"  >
+                                    <i class="fa fa-backward icon-color " ng-class="{ 'text-light-blue': vm.currentPos==0 }" ></i> 
                                 </a>
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.next()" >
-                                    <i class="fa fa-forward icon-color"></i>
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.next()"  >
+                                    <i class="fa fa-forward icon-color " ng-class="{'text-light-blue': vm.currentPos == (vm.empData[0].length - 1) }"></i>
                                 </a>
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.last()" >
-                                    <i class="fa fa-fast-forward icon-color"></i>
+                                    <i class="fa fa-fast-forward icon-color " ng-class="{'text-light-blue': vm.currentPos == (vm.empData[0].length - 1) }" ></i>
                                 </a>  
                               </span>                                
                              </div>
@@ -84,7 +84,7 @@
                                 <!-- To display all data as LIST -->
                                 <ul ng-show="toggle" class="nav nav-pills nav-stacked" >
                                     <li ng-repeat="row in vm.empData[0]" ng-if="field.fieldHidden != 'true'" >
-                                    <a href="#" ng-click="vm.fetch( row.emp_id)" >
+                                    <a href="#" ng-click="vm.fetch( row.emp_id); vm.isSave=true" >
 
                                     <!-- Cool Hari ! For dynamic fields list -->
                                     <!--<div ng-repeat="field in fieldTab.field" class="row"> [[ row[field.fieldName] ]] </div> -->
@@ -115,15 +115,25 @@
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
                     </div>
-                        <!-- To select a particular Item to edit from List view -->
+                        <!-- To select a particular Item to be edited to SAVE -->
+                        <div ng-if="vm.isSave" class="pull-right ">
+                            <span>
+                                <button  type="button" class="col-md-1 btn btn-success btn-block btn-sm btn-flat " id= "" ng-click="save(elem)"> Save </button>
+                            </span>
+                            <span>
+                                <button  type="button" class="col-md-1 btn btn-warning btn-block btn-sm btn-flat " id= "" ng-click="undo()"> Undo </button>
+                            </span>
+                        </div>
                         <uib-tab ng-if="vm.isEmployee"  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs[0]" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
-                                <div  class="form-group row" ng-repeat="elem in tabOneByOne.field">
+                                <div  class="form-group row" ng-repeat="elem in tabOneByOne.field track by $index">                                     
                                     <label  class="form-controll [[elem.fieldClass]]"  ng-hide="elem.fieldHidden=='true'">[[elem.fieldCaption]] [[ vm.totalRecords ]] </label> [[ vm.empData.data[0].length ]]
                                     
-                                    <field meta="elem" model="vm.employee"> </field>                                   
+                                    <field meta="elem" model="vm.employee"> </field>
+                                    
                                 </div>
                             </div>
+                                                        
                         </uib-tab> 
                         <uib-tab ng-if="!toggle"  index="$index + 1 " ng-repeat=" tabOneByOne in vm.json_details[0].tabs[0]" heading="[[ tabOneByOne.tabCaption ]]">
                             <div class="panel-body">
@@ -151,20 +161,31 @@
                         </span>                            
                     </div> 
                 </div>
-                <uib-tabset active="active" >
-                    <uib-tab index="$index + 1" ng-repeat=" tabOneByOne in vm.json_details[0].tabs[1]" heading="[[ tabOneByOne.name ]]" >
+                <uib-tabset active="active">
+                    <uib-tab index="$index + 1" ng-repeat=" tabOneByOne in vm.json_details[0].tabs[1]  track by $index" heading="[[ tabOneByOne.name ]]" >
                         <div class="panel-body ">
-                             <!-- [[ tabOneByOne.filename ]]   -->
-                            <div class="form-group " ng-repeat="elem in tabOneByOne.filename">
-                               <div class="form-group " ng-repeat="item in elem.tabs">
-                                    <div class="form-group row " ng-repeat="it in item.field">
-                                        <label class="form-controll [[it.fieldClass]]"  ng-hide="it.fieldHidden=='true'">[[it.fieldCaption]] 
-                                        </label>
-                                        <field meta="it" model="" > 
-                                        </field>
-                                    </div>
-                               </div>
-                            </div>  
+                            <!-- [[ tabOneByOne.filename ]]    -->
+                            <div class="form-group " ng-repeat="elem in tabOneByOne.filename  track by $index">
+                                <!-- [[elem.tabs]] -->
+                                <div class="form-group " ng-repeat="item in elem.tabs track by $index">
+                                    <!-- [[ item.field ]] -->
+                                    <table st-table="rowCollection" st-safe-src="vm.empDocs"
+                                 class="table table-striped">
+                                        <thead>
+                                            <tr >
+                                                <th ng-repeat="it in item.field track by $index" st-sort="it.fieldCaption">[[it.fieldCaption]]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="row in vm.empDocs">
+                                                <td>[[row.emp_id]]</td>
+                                                <td>[[row.code]]</td>
+                                                <td>[[row.name]]</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                            </div> 
                         </div>    
                     </uib-tab>                    
                 </uib-tabset>
@@ -177,8 +198,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2 col-sm-2 col-lg-2 pull-right" ng-repeat="action in vm.json_details[0].actions">
-                <button type="button" class="btn btn-block [[action.class]] btn-sm " id= "[[action.id]]" ng-click="[[action.action_method]]"> [[action.name]]</button>
+                <button type="button" class="btn btn-block [[action.class]] btn-sm btn-flat " id= "[[action.id]]" ng-click="[[action.action_method]]"> [[action.name]]</button>
             </div>
+            <button ng-click="vm.fetchEmpDoc()">Click ME </button>
         </div>
     </div>
 </section>
@@ -221,3 +243,11 @@
               </div> -->
 {%endblock%}
 
+<!-- 
+    <div class="form-group row " ng-repeat="it in item.field track by $index">
+        <label class="form-controll [[it.fieldClass]]"  ng-hide="it.fieldHidden=='true'">[[it.fieldCaption]] 
+        </label>
+        <field meta="it" model="" > 
+        </field>
+    </div>  
+-->
