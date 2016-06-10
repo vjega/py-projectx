@@ -95,9 +95,13 @@
                                                 <span  class="card-title-title" ng-if="row.sex=='male'">Mr. </span>
                                                 <span  class="card-title-title" ng-if="row.sex=='female'">Ms. </span> 
                                                 <span  class="card-title-title" ng-if="row.sex=='' || row.sex=='other'"> Mr|Ms. </span> 
-                                                <span class="card-title-title" > [[row.name | uppercase]] </span>
+                                                <span class="card-title-title" > [[row.name | uppercase]] 
+                                                <span>[[ designation ]]       
+                                                </span>
+                                                </span>
+
                                                 <span class="card-text card-title-info">
-                                                 Designation: [[row.designation]]
+                                                 Designation: 
                                                 </span>
                                                 <span class="card-text card-title-info">
                                                  Center code: [[row.center_code]]
@@ -164,26 +168,31 @@
                 <uib-tabset active="active">
                     <uib-tab index="$index + 1" ng-repeat=" tabOneByOne in vm.json_details[0].tabs[1]  track by $index" heading="[[ tabOneByOne.name ]]" >
                         <div class="panel-body ">
-                            <!-- [[ tabOneByOne.filename ]]    -->
-                            <div class="form-group " ng-repeat="elem in tabOneByOne.filename  track by $index">
-                                <!-- [[elem.tabs]] -->
+                             <!-- [[ tabOneByOne.filename ]]     -->
+                            <div class="form-group " ng-repeat="elem in tabOneByOne.filename  track by $index">                          
+                                <!--  [[elem.tabs]]   [[elem.name]]  -->
                                 <div class="form-group " ng-repeat="item in elem.tabs track by $index">
-                                    <!-- [[ item.field ]] -->
-                                    <table st-table="rowCollection" st-safe-src="vm.empDocs"
-                                 class="table table-striped">
+                                <!-- [[item]] -->                                    
+                                    <table st-table="rowCollection"  st-safe-src="vm[elem.name]"
+                                 class="table table-striped">                                  
                                         <thead>
                                             <tr >
-                                                <th ng-repeat="it in item.field track by $index" st-sort="it.fieldCaption">[[it.fieldCaption]]</th>
+                                                <th ng-repeat="it in item.field track by $index" st-sort="it.fieldCaption">[[it.fieldCaption]] </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="row in vm.empDocs">
-                                                <td>[[row.emp_id]]</td>
-                                                <td>[[row.code]]</td>
-                                                <td>[[row.name]]</td>
-                                            </tr>
+                                            <tr><td colspan="100%" ng-if="rowCollection.length==0" align="center"><span class="info no_data">No Record Found!</span></td></tr>
+                                      
+                                            <tr ng-repeat="row in rowCollection">
+                                                <td ng-repeat="it in item.field track by $index" >[[ row[it.fieldName] ]]</td>
+                                                <!-- <td>[[ row.slno ]]</td>
+                                                <td>[[ row.emp_id ]]</td>
+                                                <td>[[ row.code ]]</td>
+                                                <td>[[ row.name ]]</td>
+                                                <td>[[ row.remarks ]]</td> -->
+                                            </tr> 
                                         </tbody>
-                                    </table>
+                                    </table>                                   
                                 </div> 
                             </div> 
                         </div>    
@@ -200,7 +209,7 @@
             <div class="col-md-2 col-sm-2 col-lg-2 pull-right" ng-repeat="action in vm.json_details[0].actions">
                 <button type="button" class="btn btn-block [[action.class]] btn-sm btn-flat " id= "[[action.id]]" ng-click="[[action.action_method]]"> [[action.name]]</button>
             </div>
-            <button ng-click="vm.fetchEmpDoc()">Click ME </button>
+            <!-- <button ng-click="vm.fetchEmpDoc()">Click ME </button> -->
         </div>
     </div>
 </section>

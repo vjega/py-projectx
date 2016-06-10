@@ -5,8 +5,6 @@ from projectx import views
 urlpatterns = [
     url(r'^menus/$', views.menu_list),
     url(r'^employee/$', views.employee_list),
-    url(r'^emp_docs/$', views.emp_documents_list),
-    url(r'^emp_docs/(?P<emp_id>[\w\-]+)/$', views.emp_documents_detail),
     url(r'^employee/(?P<emp_id>[\w\-]+)/$', views.employee_detail),
     url(r'^candidate/$', views.candidate_list),
     url(r'^candidate/(?P<id>[\w\-]+)/$', views.candidate_detail),
@@ -30,6 +28,13 @@ urlpatterns = [
     url(r'^user/(?P<user_id>[\w\-]+)/$', views.user_detail),
     url(r'^group/$', views.group_list),
     url(r'^group/(?P<group_id>[\w\-]+)/$', views.group_detail),
+    url(r'^emp_docs/$', views.emp_documents_list),
+    url(r'^emp_docs/(?P<emp_id>[\w\-]+)/$', views.emp_documents_detail),
+    url(r'^emp_visa/$', views.emp_visa_list),
+    url(r'^emp_visa/(?P<emp_id>[\w\-]+)/$', views.emp_visa_detail),
+    url(r'^emp_exp/$', views.emp_experience_list),
+    url(r'^emp_exp/(?P<emp_id>[\w\-]+)/$', views.emp_experience_detail),
+
 ]
 # url(r'^polls/(?P<string>[\w\-]+)/$','polls.views.detail')
 urlpatterns = format_suffix_patterns(urlpatterns)	

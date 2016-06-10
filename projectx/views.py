@@ -6,8 +6,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
-from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group, EmpDocuments
-from projectx.serializers import MenuSerializer, EmployeeSerializer, CandidateSerializer, AssetsSerializer, DocumentsSerializer , ProjectsSerializer, CoursesSerializer, CircularsSerializer, ReportingSerializer, LocationSerializer, CompanySettingsSerializer, UserSerializer, GroupSerializer, EmpDocumentsSerializer
+from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group, EmpDocuments, EmpVisa  , EmployeeExperience
+from projectx.serializers import MenuSerializer, EmployeeSerializer, CandidateSerializer, AssetsSerializer, DocumentsSerializer , ProjectsSerializer, CoursesSerializer, CircularsSerializer, ReportingSerializer, LocationSerializer, CompanySettingsSerializer, UserSerializer, GroupSerializer, EmpDocumentsSerializer, EmpVisaSerializer  , EmpExperienceSerializer
 
 class JSONResponse(HttpResponse):
     """
@@ -567,7 +567,9 @@ def emp_documents_detail(request, emp_id):
     try:
         empdocuments = EmpDocuments.objects.get(emp_id=emp_id)
     except EmpDocuments.DoesNotExist:
-        return HttpResponse(status=404)
+        #return HttpResponse(status=404)
+        return JSONResponse([],status=200)  # empty response with SUCCESS status 200 
+        
 
     if request.method == 'GET':
         serializer = EmpDocumentsSerializer(empdocuments)
@@ -585,9 +587,80 @@ def emp_documents_detail(request, emp_id):
         empdocuments.delete()
         return HttpResponse(status=204)
 
+@api_view(['GET','POST'])
+def emp_visa_list(request):
+    """ List all employeevisa, or create a new  """
+    if request.method == 'GET':
+        empvisa = EmpVisa.objects.all()
+        serializer = EmpVisaSerializer(empvisa, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = EmpVisaSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+def emp_visa_detail(request, emp_id):
+    """ CRUD """
+    try:
+        empvisa = EmpVisa.objects.get(emp_id=emp_id)
+    except EmpVisa.DoesNotExist:
+        return JSONResponse([],status=200)
+    if request.method == 'GET':
+        serializer = EmpVisaSerializer(empvisa)
+        return JSONResponse(serializer.data)
 
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = EmpVisaSerializer(empvisa, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        empvisa.delete()
+        return HttpResponse(status=204)
+
+@api_view(['GET','POST'])
+def emp_experience_list(request):
+    """ List all emp experiences or create a new """
+    if request.method == 'GET':
+        empexp = EmployeeExperience.objects.all()
+        serializer = EmpExperienceSerializer(empexp, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = EmpExperienceSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def emp_experience_detail(request, emp_id):
+    """ CRUD """
+    try:
+        empexp = EmployeeExperience.objects.get(emp_id=emp_id)
+    except EmployeeExperience.DoesNotExist:
+        return JSONResponse([],status=200)
+    if request.method == 'GET':
+        serializer = EmpExperienceSerializer(empexp) 
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = EmpExperienceSerializer(empexp,data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        empexp.delete()
+        return HttpResponse(status=204)
 
 
 

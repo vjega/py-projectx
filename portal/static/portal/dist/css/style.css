@@ -38,7 +38,11 @@
 .logo{
   background-color: #fff;
 }
-
+.info .no_data{
+  font-weight: bold;
+  text-align: center;
+  font-style: rgb(192, 192, 192)
+}
 
 /* Card with material style  
 .card {

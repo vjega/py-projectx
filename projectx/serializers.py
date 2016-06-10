@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group, EmpDocuments
+from projectx.models import Menus, Employee, Candidate, Assetmaster, Documents, Projects, Courses, Circulars, Reporting, Location, CompanySettings, User, Group, EmpDocuments, EmpVisa  , EmployeeExperience
 
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,3 +72,13 @@ class EmpDocumentsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = EmpDocuments
 		fields = ('slno','code','name','course','emp_id','line_no_field','doc_type','doc_file','upload_date','remarks','hr_remarks','in_hand','return_date','verified','returned')
+
+class EmpVisaSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = EmpVisa
+		fields = ('slno', 'emp_id', 'line_no_field', 'type', 'country', 'start_date','end_date','upload_date', 'hr_remarks', 'remarks')
+
+class EmpExperienceSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = EmployeeExperience
+		fields = ('slno','emp_id','line_no_field','company_name','total_exp','doj','dol','designation','role','team_size','ctc','upload_date','hr_remarks','remarks')

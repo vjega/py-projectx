@@ -400,3 +400,41 @@ class EmpDocuments(models.Model):
     class Meta:
         managed = True
         db_table = 'emp_documents'
+
+class EmpVisa(models.Model):
+    slno = models.AutoField(primary_key=True)
+    emp_id = models.CharField(max_length=40)
+    line_no_field = models.IntegerField(db_column='line_no_') # it ends with _
+    type = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    upload_date = models.DateField()
+    hr_remarks = models.CharField(max_length=240)
+    remarks = models.CharField(max_length=240)
+    ts = models.DateTimeField()
+
+    class Meta:
+        managed = True
+        db_table = 'emp_visa'
+
+class EmployeeExperience(models.Model):
+    slno = models.AutoField(primary_key=True)
+    emp_id = models.CharField(max_length=40)
+    line_no_field = models.IntegerField(db_column='line_no_') # It ends with _
+    company_name = models.CharField(max_length=60)
+    total_exp = models.CharField(max_length=60)
+    doj = models.DateField()
+    dol = models.DateField()
+    designation = models.CharField(max_length=60)
+    role = models.CharField(max_length=60)
+    team_size = models.CharField(max_length=60)
+    ctc = models.CharField(max_length=60)
+    upload_date = models.DateField()
+    hr_remarks = models.CharField(max_length=240)
+    remarks = models.CharField(max_length=240)
+    ts = models.DateTimeField()
+
+    class Meta:
+        managed = True
+        db_table = 'emp_experience'

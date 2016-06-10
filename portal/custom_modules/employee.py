@@ -298,20 +298,24 @@ tabs.append({
     'type' : 'list',
     'filename' : doc_table #'employee_doc'
 })
+
+import employee_visa, employee_exp
+
 tabs.append({
     'id' : 'employee_visa',
     'name' : 'Visa',
     'type' : 'list',
-    'filename' : 'employee_visa'
+    'filename' : employee_visa.table
 })
 tabs.append({
     'id' : 'emp_experience',
     'name' : 'Experience',
     'type' : 'list',
-    'filename' : 'emp_experience'
+    'filename' : employee_exp.table
 })
 
-print doc_table 
+# print doc_table 
+print employee_visa.table
 
 tabs_set.insert(1,tabs)
 

@@ -13,10 +13,13 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
     vm.employee ;
     vm.isEmployee = false;
 
+    /* 1toMany, Emp<-->Documents(Doc,Visa & etc ) */
     vm.empDocs ;
+    vm.empVisa ;
+    vm.empExp ;
 
     /* Navigation first, last, next and previous controls based on currentPos */
-    vm.currentPos = 0; 
+    vm.currentPos = 134 ;  // 134; 
     vm.currentRecord = '';         
 
     vm.next = function(){
@@ -46,16 +49,14 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
         vm.fetchEmpDoc(vm.currentRecord);
     }
 
-    vm.fetch = function(req){    	
-    	console.log(req);
+    vm.fetch = function(req){    	    	
     	$http.get('http://localhost:8000/api/employee/'+req)
     		.success(function(data, status, headers, config){    			
                 vm.employee = data ;
-                vm.isEmployee = true ;
-                console.log(vm.employee);   
+                vm.isEmployee = true ;                
     		})
     		.error(function(e){
-    			console.log('fetch emp_data error ',e);
+    			console.log('emp_data error ',e);
     		})
     	;    		    	
     	vm.toggle = true ;
@@ -63,14 +64,35 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
     }
 
     vm.fetchEmpDoc = function(req){
-        console.log(req);
+        if(req==undefined) req='M497-2015';
+        
         $http.get('/api/emp_docs/'+req)
             .success(function(data,status,headers,config){
-                vm.empDocs = data ;
-                console.log(vm.empDocs);
+                vm.empDocs = data ; 
+                console.log(data)               
             })
             .error(function(e){
-                console.log('fetch emp_docs error',e);
+                console.log('emp_docs error',e);
+            })
+        ;
+
+        $http.get('/api/emp_visa/'+req)
+            .success(function(data,status,headers,config){
+                vm.empVisa = data ; 
+                console.log(data)               
+            })
+            .error(function(e){
+                console.log('emp_visa error',e);
+            })
+        ;
+
+        $http.get('/api/emp_exp/'+req)
+            .success(function(data,status,headers,config){
+                vm.empExp = data ; 
+                console.log(data)               
+            })
+            .error(function(e){
+                console.log('emp_visa error',e);
             })
         ;
     }
