@@ -560,23 +560,44 @@ def emp_documents_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@csrf_exempt
 def emp_documents_detail(request, emp_id):
     """
     Retrieve, update or delete a code snippet.
     """
     try:
-        empdocuments = EmpDocuments.objects.get(emp_id=emp_id)
+        empdocuments = EmpDocuments.objects.all().filter(emp_id=emp_id)
     except EmpDocuments.DoesNotExist:
         #return HttpResponse(status=404)
         return JSONResponse([],status=200)  # empty response with SUCCESS status 200 
         
 
     if request.method == 'GET':
-        serializer = EmpDocumentsSerializer(empdocuments)
+        serializer = EmpDocumentsSerializer(empdocuments, many=True)
         return JSONResponse(serializer.data)
+    ''' Many records cannot be updated at once '''
+    # elif request.method == 'PUT':
+    #     data = JSONParser().parse(request)
+    #     serializer = EmpDocumentsSerializer(empdocuments, data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JSONResponse(serializer.data)
+    #     return JSONResponse(serializer.errors, status=400)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
+    # elif request.method == 'DELETE':
+    #     empdocuments.delete()
+    #     return HttpResponse(status=204)
+
+''' To update or delete a particular record based on primary key [slno] '''
+@csrf_exempt
+def emp_documents_delete(request,slno):
+    try:
+        empdocuments = EmpDocuments.objects.get(slno=slno)
+    except EmpDocuments.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'PUT':
+        data = JSONParser.parse(request)
         serializer = EmpDocumentsSerializer(empdocuments, data=data)
         if serializer.is_valid():
             serializer.save()
@@ -586,6 +607,7 @@ def emp_documents_detail(request, emp_id):
     elif request.method == 'DELETE':
         empdocuments.delete()
         return HttpResponse(status=204)
+
 
 @api_view(['GET','POST'])
 def emp_visa_list(request):
@@ -603,18 +625,39 @@ def emp_visa_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@csrf_exempt
 def emp_visa_detail(request, emp_id):
     """ CRUD """
     try:
-        empvisa = EmpVisa.objects.get(emp_id=emp_id)
+        empvisa = EmpVisa.objects.all().filter(emp_id=emp_id)
     except EmpVisa.DoesNotExist:
         return JSONResponse([],status=200)
     if request.method == 'GET':
-        serializer = EmpVisaSerializer(empvisa)
+        serializer = EmpVisaSerializer(empvisa, many=True)
         return JSONResponse(serializer.data)
+    ''' Many records cannot be updated at once '''
+    # elif request.method == 'PUT':
+    #     data = JSONParser().parse(request)
+    #     serializer = EmpVisaSerializer(empvisa, data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JSONResponse(serializer.data)
+    #     return JSONResponse(serializer.errors, status=400)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
+    # elif request.method == 'DELETE':
+    #     empvisa.delete()
+    #     return HttpResponse(status=204)
+
+''' To update or delete a particular record based on primary key [slno] '''
+@csrf_exempt
+def emp_visa_delete(request,slno):
+    try:
+        empvisa = EmpVisa.objects.get(slno=slno)
+    except EmpVisa.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'PUT':
+        data = JSONParser.parse(request)
         serializer = EmpVisaSerializer(empvisa, data=data)
         if serializer.is_valid():
             serializer.save()
@@ -624,6 +667,7 @@ def emp_visa_detail(request, emp_id):
     elif request.method == 'DELETE':
         empvisa.delete()
         return HttpResponse(status=204)
+
 
 @api_view(['GET','POST'])
 def emp_experience_list(request):
@@ -640,19 +684,45 @@ def emp_experience_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# For a particular emp 
+@csrf_exempt
 def emp_experience_detail(request, emp_id):
     """ CRUD """
     try:
-        empexp = EmployeeExperience.objects.get(emp_id=emp_id)
+        empexp = EmployeeExperience.objects.filter(emp_id=emp_id)
+        # print empexp , ' hello hari'
     except EmployeeExperience.DoesNotExist:
         return JSONResponse([],status=200)
     if request.method == 'GET':
-        serializer = EmpExperienceSerializer(empexp) 
+        serializer = EmpExperienceSerializer(empexp, many=True) 
         return JSONResponse(serializer.data)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = EmpExperienceSerializer(empexp,data=data)
+    ''' Many records cannot be updated at once '''
+    # elif request.method == 'PUT':
+    #     data = JSONParser().parse(request)
+    #     serializer = EmpExperienceSerializer(empexp,data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JSONResponse(serializer.data)
+    #     return JSONResponse(serializer.errors, status=400)
+
+    # elif request.method == 'DELETE':
+    #     empexp.delete()
+    #     return HttpResponse(status=204)
+
+
+''' To update or delete a particular record based on primary key [slno] '''
+@csrf_exempt
+def emp_experience_delete(request, slno):
+    try:
+        empexp = EmployeeExperience.objects.get(slno=slno)
+        #print 'hi hari ' . empexp
+    except EmployeeExperience.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'PUT':
+        data = JSONParser.parse(request)
+        serializer = EmpExperienceSerializer(empexp, data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data)
@@ -661,6 +731,7 @@ def emp_experience_detail(request, emp_id):
     elif request.method == 'DELETE':
         empexp.delete()
         return HttpResponse(status=204)
+
 
 
 

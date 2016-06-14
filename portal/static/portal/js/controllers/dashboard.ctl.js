@@ -13,13 +13,15 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
     vm.employee ;
     vm.isEmployee = false;
 
-    /* 1toMany, Emp<-->Documents(Doc,Visa & etc ) */
+
+
+    /* 1 to Many, Emp<-->Documents(Doc,Visa & Experience ) */
     vm.empDocs ;
     vm.empVisa ;
     vm.empExp ;
 
     /* Navigation first, last, next and previous controls based on currentPos */
-    vm.currentPos = 134 ;  // 134; 
+    vm.currentPos = 0 ;  // 0 or 134; 
     vm.currentRecord = '';         
 
     vm.next = function(){
@@ -53,7 +55,8 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
     	$http.get('http://localhost:8000/api/employee/'+req)
     		.success(function(data, status, headers, config){    			
                 vm.employee = data ;
-                vm.isEmployee = true ;                
+                vm.isEmployee = true ;      
+                //console.log('cool hari')          ;
     		})
     		.error(function(e){
     			console.log('emp_data error ',e);
@@ -62,14 +65,17 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
     	vm.toggle = true ;
     	toggle =false ;
     }
-
+    /*
+        One to Many Relationship [ Emp vs {Docs, Visa & Exp} ]
+        To fetch all documents in the beginning
+    */
     vm.fetchEmpDoc = function(req){
-        if(req==undefined) req='M497-2015';
+        //if(req==undefined) req='M497-2015';
         
         $http.get('/api/emp_docs/'+req)
             .success(function(data,status,headers,config){
                 vm.empDocs = data ; 
-                console.log(data)               
+                //console.log(data)               
             })
             .error(function(e){
                 console.log('emp_docs error',e);
@@ -79,7 +85,7 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
         $http.get('/api/emp_visa/'+req)
             .success(function(data,status,headers,config){
                 vm.empVisa = data ; 
-                console.log(data)               
+                //console.log(data)               
             })
             .error(function(e){
                 console.log('emp_visa error',e);
@@ -89,12 +95,84 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
         $http.get('/api/emp_exp/'+req)
             .success(function(data,status,headers,config){
                 vm.empExp = data ; 
-                console.log(data)               
+                //console.log(data)               
             })
             .error(function(e){
-                console.log('emp_visa error',e);
+                console.log('emp_experience error ',e);
             })
         ;
+    }
+    vm.deleteDoc = function (doc_type_name, emp_id ,id){
+        //console.log('hari -> ',name)
+        var name= doc_type_name;
+        var flag = confirm("Are you sure SLNO:" + id + " to be deleted ") ;        
+        // console.log("Delete: "+ flag + " Slno: " + id);
+
+        if(flag){
+            if(name == 'empDocs' ){
+                $http.delete('/api/emp_docs_del/'+id)
+                .success(function(data,status,headers,config){
+                    //console.log('cool hari ! Deleted ');                    
+                })
+                .error(function(e){
+                    console.log('Emp_docs_delete error ',e);
+                })
+                ;
+
+                $http.get('/api/emp_docs/'+emp_id)
+                .success(function(data,status,headers,config){
+                    vm.empDocs = data ; 
+                    //console.log(data)               
+                })
+                .error(function(e){
+                    console.log('emp_docs error',e);
+                })
+                ;
+
+            }else if(name == 'empVisa' ){
+                $http.delete('/api/emp_visa_del/'+emp_id)
+                .success(function(data,status,headers,config){
+                    //console.log('cool hari!  Deleted ');                    
+                })
+                .error(function(e){
+                    console.log('Emp_visa_delete error ',e);
+                })
+                ;
+
+                $http.get('/api/emp_visa/'+emp_id)
+                .success(function(data,status,headers,config){
+                    vm.empVisa = data ; 
+                    //console.log(data)               
+                })
+                .error(function(e){
+                    console.log('emp_visa error',e);
+                })
+                ;
+
+            }else if(name == 'empExp' ){
+                $http.delete('/api/emp_exp_del/'+id)
+                .success(function(data,status,headers,config){
+                    //console.log('cool hari! Deleted ');                    
+                })
+                .error(function(e){
+                    console.log('Emp_exp_delete error ',e);
+                })
+                ;
+                $http.get('/api/emp_exp/'+emp_id)
+                .success(function(data,status,headers,config){
+                    vm.empExp = data ; 
+                    //console.log(data)               
+                })
+                .error(function(e){
+                    console.log('emp_experience error ',e);
+                })
+                ;
+            }else{
+                //console.log('Nothing happened, Hari! ');
+            }
+        // to refresh all tab content 
+        // vm.fetchEmpDoc(emp_id);
+        }
     }
 
 }]);

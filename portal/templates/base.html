@@ -278,7 +278,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Content Wrapper. Contains page content -->
      <!-- /.content-wrapper -->
-	{%block content%}
+	{%block content%}  
 	{%endblock%}
       <!-- Main Footer -->
       <footer class="main-footer">
@@ -383,6 +383,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
          Both of these plugins are recommended to enhance the
          user experience. Slimscroll is required when using the
          fixed layout. -->
+
+
+    <!-- CSRF_TOKEN -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
+    <script>
+      var csrftoken = '{{ csrf_token }}';
+    </script>
   </body>
 </html>
 
