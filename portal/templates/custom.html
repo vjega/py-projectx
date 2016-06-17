@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {%block content%}
 <div class="content-wrapper">
- <section class="content">
+<section class="content">
 <div class="main_container" ng-controller="dashboardCtl as vm">
 <section id="dashboard-view" class="mainbar">
     <section class="matter">
@@ -30,7 +30,7 @@
                                 <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.searchRecord()">
                                     <i class="fa fa-search icon-color "></i>
                                 </a>
-                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.previous()">
+                                <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="">
                                     <i class="fa fa-trash-o icon-color"></i>
                                 </a>
                                 <div ng-click="vm.toggle=true">
@@ -186,7 +186,7 @@
                                             <tr ng-repeat="row in rowCollection">
                                                 <td ng-repeat="it in item.field track by $index" >[[ row[it.fieldName] ]]</td>
                                                 <td>
-                                                    <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.editDoc(row.slno , row.emp_id)">
+                                                    <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"  data-toggle="modal" data-target="#myModal" href="#" ng-click="vm.editDoc(item, elem.name, row.emp_id, row.slno)">
                                                         <i class="fa fa-pencil "></i>
                                                     </a>
                                                     <a class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" href="#" ng-click="vm.deleteDoc( elem.name, row.emp_id, row.slno)">
@@ -218,9 +218,40 @@
         <div class="col-md-12">
             <div class="col-md-2 col-sm-2 col-lg-2 pull-right" ng-repeat="action in vm.json_details[0].actions">
                 <button type="button" class="btn btn-block [[action.class]] btn-sm btn-flat " id= "[[action.id]]" ng-click="[[action.action_method]]"> [[action.name]]</button>
+            </div>            
+        </div>
+    </div>
+</section>
+<section>
+    <div>        
+        <div class="modal modal-primary" id="myModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Update Info</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group row center " ng-repeat="label in vm.editEmpJson">                         
+                            <label class=" [[ label['fieldClass'] ]] col-md-3 control-label " > [[ label['fieldCaption'] ]] </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="[[ label['fieldName'] ]]" value=" [[ vm.editEmp[ label['fieldName'] ] ]] "  placeholder=" [[ vm.editEmp[ label['fieldName'] ] ]] ">
+                            </div>
+                            <!-- <label class="col-md-3 form-controll">
+                             [[  (key.substr(0, 1).toUpperCase() + key.substr(1)).replace('_',' ').replace('_',' ')
+                            ]] </label>
+                            <input type="text" class="col-md-7 form-control "
+                            name="[[key]]" placeholder="[[key]]" value="[[value]]"/> -->
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline" ng-click="vm.ok(this.value)" >Update</button>                        
+                    </div>
+                </div>
             </div>
-            <!-- <button ng-click="vm.fetchEmpDoc()">Click ME </button> -->
-            <!-- <input type="text" ng-model="vm.currentPos"> -->
         </div>
     </div>
 </section>
@@ -263,11 +294,11 @@
               </div> -->
 {%endblock%}
 
-<!-- 
-    <div class="form-group row " ng-repeat="it in item.field track by $index">
-        <label class="form-controll [[it.fieldClass]]"  ng-hide="it.fieldHidden=='true'">[[it.fieldCaption]] 
-        </label>
-        <field meta="it" model="" > 
-        </field>
-    </div>  
--->
+
+
+
+
+
+
+
+        

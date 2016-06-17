@@ -596,7 +596,11 @@ def emp_documents_delete(request,slno):
     except EmpDocuments.DoesNotExist:
         return HttpResponse(status=404)
 
-    if request.method == 'PUT':
+    if request.method == 'GET':
+        serializer = EmpDocumentsSerializer(empdocuments)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
         data = JSONParser.parse(request)
         serializer = EmpDocumentsSerializer(empdocuments, data=data)
         if serializer.is_valid():
@@ -656,7 +660,11 @@ def emp_visa_delete(request,slno):
     except EmpVisa.DoesNotExist:
         return HttpResponse(status=404)
 
-    if request.method == 'PUT':
+    if request.method == 'GET':
+        serializer = EmpVisaSerializer(empvisa)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
         data = JSONParser.parse(request)
         serializer = EmpVisaSerializer(empvisa, data=data)
         if serializer.is_valid():
@@ -720,7 +728,10 @@ def emp_experience_delete(request, slno):
     except EmployeeExperience.DoesNotExist:
         return HttpResponse(status=404)
 
-    if request.method == 'PUT':
+    if request.method == 'GET':
+        serializer = EmpExperienceSerializer(empexp)
+        return JSONResponse(serializer.data)
+    elif request.method == 'PUT':
         data = JSONParser.parse(request)
         serializer = EmpExperienceSerializer(empexp, data=data)
         if serializer.is_valid():

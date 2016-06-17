@@ -119,7 +119,7 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
                 })
                 ;
 
-                $http.get('/api/emp_docs/'+emp_id)
+                $http.get('/api/emp_docs/'+ emp_id)
                 .success(function(data,status,headers,config){
                     vm.empDocs = data ; 
                     //console.log(data)               
@@ -130,7 +130,7 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
                 ;
 
             }else if(name == 'empVisa' ){
-                $http.delete('/api/emp_visa_del/'+emp_id)
+                $http.delete('/api/emp_visa_del/'+id)
                 .success(function(data,status,headers,config){
                     //console.log('cool hari!  Deleted ');                    
                 })
@@ -174,6 +174,51 @@ portalApp.controller('dashboardCtl',['$scope','$http','renderTemplate', '$q', 'r
         // vm.fetchEmpDoc(emp_id);
         }
     }
+
+    /* Modal to Edit information of Docs,Visa & etc */
+    vm.editEmp ;
+    vm.editEmpJson ;
+    vm.editDoc= function (json_item, doc_type_name, emp_id ,id){
+        //console.log('edit' ,id, emp_id, doc_type_name);
+        vm.editEmpJson = json_item.field;
+        //console.log(json_item.field);
+        if(doc_type_name == 'empExp' ){            
+            $http.get('/api/emp_exp_del/'+id)
+                .success(function(data,status,headers,config){
+                    vm.editEmp = data ; 
+                    //console.log(vm.editEmp)               
+                })
+                .error(function(e){
+                    console.log('emp_experience_edit error ',e);
+                })
+            ;
+        }else if(doc_type_name == 'empDocs' ){            
+            $http.get('/api/emp_docs_del/'+id)
+                .success(function(data,status,headers,config){
+                    vm.editEmp = data ; 
+                    //console.log(vm.editEmp)               
+                })
+                .error(function(e){
+                    console.log('emp_docs_edit error ',e);
+                })
+            ;
+        }else if(doc_type_name == 'empVisa' ){            
+            $http.get('/api/emp_visa_del/'+id)
+                .success(function(data,status,headers,config){
+                    vm.editEmp = data ; 
+                    //console.log(vm.editEmp)               
+                })
+                .error(function(e){
+                    console.log('emp_visa_edit error ',e);
+                })
+            ;
+        }
+
+    }
+    vm.ok = function(val){
+        console.log("Welcome ", val);
+    }
+
 
 }]);
 
